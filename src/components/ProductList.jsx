@@ -6,7 +6,7 @@ function ProductList() {
   return (
     <div className="row g-4">
       {products.map((product) => (
-        <SingleProduct />
+        <SingleProduct product={product} />
       ))}
     </div>
   );
