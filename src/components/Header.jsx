@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <nav
-      className="navbar navbar-expand-lg bg-body-tertiary"
+      className="navbar navbar-expand-lg bg-body-tertiary sticky-top"
       data-bs-theme="dark"
     >
       <div className="container-fluid container">
@@ -28,16 +28,20 @@ function Header() {
                 Home
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="fas fa-shopping-cart me-1"></i>
-                Cart
-              </a>
-            </li>
+
             <li className="nav-item">
               <a className="nav-link" href="#">
                 <i className="fas fa-user me-1"></i>
                 Sign In
+              </a>
+            </li>
+            <li className="nav-item ">
+              <a className="nav-link" href="#">
+                <i className="fas fa-shopping-cart me-1"></i>
+                Cart
+                <span class="badge rounded-pill text-bg-light ms-2 d-inline-block mb-6">
+                  1
+                </span>
               </a>
             </li>
             {/* <li className="nav-item dropdown">
