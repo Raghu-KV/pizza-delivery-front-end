@@ -26,7 +26,7 @@ function SingleProduct({ product }) {
           <p className="card-text fw-bolder my-2 fs-5">Rs.{product.price}</p>
           <button
             className="btn btn-primary"
-            onClick={(product) => addItemToCart(product)}
+            onClick={(product) => dispatch(addToCart(product))}
             disabled={isButtonDisabled}
           >
             Add to Cart
