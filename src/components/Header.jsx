@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const cartLength = useSelector((state) => state.cart.value.length);
   return (
     <nav
       className="navbar navbar-expand-lg bg-body-tertiary sticky-top"
@@ -39,8 +41,8 @@ function Header() {
               <Link className="nav-link" to={"/cart"}>
                 <i className="fas fa-shopping-cart me-1"></i>
                 Cart
-                <span class="badge rounded-pill text-bg-light ms-2 d-inline-block mb-6">
-                  1
+                <span className="badge rounded-pill text-bg-light ms-2 d-inline-block mb-6">
+                  {cartLength}
                 </span>
               </Link>
             </li>

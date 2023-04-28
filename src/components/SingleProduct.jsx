@@ -1,6 +1,17 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux_reducers/cart";
+import { useState } from "react";
 
 function SingleProduct({ product }) {
+  const dispatch = useDispatch();
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const addItemToCart = (product) => {
+    dispatch(addToCart(product));
+    setIsButtonDisabled(true);
+  };
+
   return (
     <div className="col-12 col-md-6 col-lg-4 col-xxl-3">
       <div className="card mx-auto text-center" style={{ width: "18rem" }}>
@@ -13,9 +24,13 @@ function SingleProduct({ product }) {
             basil.
           </p>
           <p className="card-text fw-bolder my-2 fs-5">Rs.{product.price}</p>
-          <a href="#" className="btn btn-primary">
+          <button
+            className="btn btn-primary"
+            onClick={(product) => addItemToCart(product)}
+            disabled={isButtonDisabled}
+          >
             Add to Cart
-          </a>
+          </button>
         </div>
       </div>
     </div>

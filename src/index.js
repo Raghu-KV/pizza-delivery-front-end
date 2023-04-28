@@ -7,10 +7,12 @@ import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import productReducers from "./redux_reducers/product";
+import cartReducer from "./redux_reducers/cart";
 
 const store = configureStore({
   reducer: {
     products: productReducers,
+    cart: cartReducer,
   },
 });
 
