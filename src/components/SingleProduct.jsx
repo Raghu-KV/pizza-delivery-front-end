@@ -1,15 +1,25 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux_reducers/cart";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function SingleProduct({ product }) {
+  const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  useEffect(() => {
+    cart.map((item) => {
+      if (item._id === product._id) {
+        setIsButtonDisabled(true);
+      }
+    });
+  }, [cart]);
+
   const addItemToCart = (product) => {
-    dispatch(addToCart(product));
-    setIsButtonDisabled(true);
+    const productWithQuantanty = { ...product, quantity: 1 };
+    dispatch(addToCart(productWithQuantanty));
+    //console.log(cart);
   };
 
   return (
@@ -26,7 +36,7 @@ function SingleProduct({ product }) {
           <p className="card-text fw-bolder my-2 fs-5">Rs.{product.price}</p>
           <button
             className="btn btn-primary"
-            onClick={(product) => addItemToCart(product)}
+            onClick={() => addItemToCart(product)}
             disabled={isButtonDisabled}
           >
             Add to Cart
