@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { saveAllProducts } from "../redux_reducers/product";
+import { addToCart } from "../redux_reducers/cart";
+import { useState } from "react";
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -18,6 +20,16 @@ function ProductList() {
 
   useEffect(() => {
     allProducts();
+  }, []);
+
+  useEffect(() => {
+    const parseData = localStorage.getItem("cart");
+    if (parseData) {
+      const localStorageCartItems = JSON.parse(parseData);
+      dispatch(addToCart(localStorageCartItems));
+    } else {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
   }, []);
 
   return (

@@ -18,8 +18,42 @@ function SingleProduct({ product }) {
 
   const addItemToCart = (product) => {
     const productWithQuantanty = { ...product, quantity: 1 };
-    dispatch(addToCart(productWithQuantanty));
-    //console.log(cart);
+
+    const cartLocalData = localStorage.getItem("cart");
+    const verifyData = JSON.parse(cartLocalData);
+
+    // if (verifyData.length === 0) {
+    //   cartItems.push(productWithQuantanty);
+    //   console.log(cartItems);
+    //   localStorage.setItem("cart", JSON.stringify(cartItems));
+    //   const localStorageCartItem = localStorage.getItem("cart");
+    //   const convertedLocalStorageCartItem = JSON.parse(localStorageCartItem);
+    //   dispatch(addToCart(convertedLocalStorageCartItem));
+    // } else {
+    // const cartLocalData = localStorage.getItem("cart");
+    // const verifyData = JSON.parse(cartLocalData); //this is an array
+    const newCartItems = [...verifyData, productWithQuantanty];
+    localStorage.setItem("cart", JSON.stringify(newCartItems));
+    dispatch(addToCart(newCartItems));
+    console.log("something in local storage", newCartItems);
+    // }
+    // if (cartToStringify.length === 0) {
+    //   cartItems.push(productWithQuantanty);
+    //   console.log(cartItems);
+    //   localStorage.setItem("cart", JSON.stringify(cartItems));
+    //   const localStorageCartItems = JSON.parse(parseData);
+    //   dispatch(addToCart(localStorageCartItems));
+    // } else {
+    //   const oldCartItem = [...cartItems, productWithQuantanty];
+    //   // localStorage.setItem("cart", JSON.stringify(oldCartItem));
+    //   // const localStorageCartItems = JSON.parse(parseData);
+    //   // dispatch(addToCart(localStorageCartItems));
+    //   console.log(oldCartItem);
+    // }
+
+    // const localStorageCartItems = JSON.parse(parseData);
+    // //console.log(localStorageCartItems);
+    // dispatch(addToCart(localStorageCartItems));
   };
 
   return (
