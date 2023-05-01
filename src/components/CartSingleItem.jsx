@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteItemFromCart } from "../redux_reducers/cart";
 import { changeQuantity } from "../redux_reducers/cart";
 import { useState, useEffect } from "react";
@@ -19,23 +19,38 @@ function CartSingleItem({ singleCart }) {
     console.log("clicked", singleCart, parsedlocalStoredCart, newCartData);
   };
 
-  // const updateQuantity = (event) => {
-  //   setQuantity(event.target.value);
+  const updateQuantity = (event) => {
+    setQuantity(event.target.value);
 
-  //   // const localStoredCart = localStorage.getItem("cart");
-  //   // const parsedlocalStoredCart = JSON.parse(localStoredCart);
-  //   // parsedlocalStoredCart.map((data) => {
-  //   //   if (data._id === singleCart._id) {
-  //   //     data.quantity = +quantity;
-  //   //   }
-  //   // });
-  //   // console.log(parsedlocalStoredCart);
-  // };
+    // const localStoredCart = localStorage.getItem("cart");
+    // const parsedlocalStoredCart = JSON.parse(localStoredCart);
+    // parsedlocalStoredCart.map((data) => {
+    //   if (data._id === singleCart._id) {
+    //     data.quantity = +quantity;
+    //   }
+    // });
+    // console.log(parsedlocalStoredCart);
+  };
+
   useEffect(() => {
     console.log("changed in quantity");
     const changedQty = { ...singleCart, quantity: +quantity };
     console.log(changedQty);
     dispatch(changeQuantity(changedQty));
+
+    const localStoredCart = localStorage.getItem("cart");
+    const parsedlocalStoredCart = JSON.parse(localStoredCart);
+
+    //console.log("before Map :", parsedlocalStoredCart);
+    parsedlocalStoredCart.map((data) => {
+      if (data._id === changedQty._id) {
+        data.quantity = changedQty.quantity;
+      }
+    });
+
+    localStorage.setItem("cart", JSON.stringify(parsedlocalStoredCart));
+    // console.log("after map :", changedQty.quantity);
+    // console.log("after map :", parsedlocalStoredCart);
   }, [quantity]);
 
   return (
