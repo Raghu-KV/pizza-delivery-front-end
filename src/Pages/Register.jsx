@@ -2,18 +2,26 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 
-function SignIn() {
+function Register() {
   const formik = useFormik({
     initialValues: {
+      userName: "",
       email: "",
       password: "",
     },
     validationSchema: yup.object({
+      userName: yup
+        .string()
+        .min(7, "Username must be 7 character or above")
+        .required("Username is required"),
       email: yup
         .string()
         .required("Emil is Required")
         .email("should be a vailed email"),
-      password: yup.string().required("Passwored is Required"),
+      password: yup
+        .string()
+        .min(7, "Password must be 7 character or above")
+        .required("Passwored is Required"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -23,6 +31,26 @@ function SignIn() {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="exampleInputName" className="form-label">
+            Username
+          </label>
+          <input
+            type="text"
+            className="form-control border border-black"
+            id="exampleInputName"
+            aria-describedby="namelHelp"
+            name="userName"
+            value={formik.values.userName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.userName && formik.errors.userName ? (
+            <div id="emailHelp" className="form-text text-danger">
+              {formik.errors.userName}
+            </div>
+          ) : null}
+        </div>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -75,10 +103,10 @@ function SignIn() {
         </span>
       </form>
       <p>
-        Don't have an account try <Link to={"/register"}>REGISTER</Link>{" "}
+        Already have an account try <Link to={"/signIn"}>SIGN IN</Link>{" "}
       </p>
     </div>
   );
 }
 
-export default SignIn;
+export default Register;
