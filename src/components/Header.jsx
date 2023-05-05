@@ -9,9 +9,9 @@ function Header() {
       data-bs-theme="dark"
     >
       <div className="container-fluid container">
-        <a className="navbar-brand " href="#">
+        <Link className="navbar-brand " to={"/"}>
           PizzaD
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
