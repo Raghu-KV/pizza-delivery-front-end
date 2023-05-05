@@ -61,6 +61,7 @@ function SignIn() {
             </div>
           ) : null}
         </div>
+        <p style={{ fontSize: "15       mmmmmmmmmmmm px" }}>Forget Password</p>
 
         <button
           type="submit"
