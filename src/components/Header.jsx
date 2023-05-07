@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { FRONT_END_URL } from "../URL";
 function Header() {
   const token = localStorage.getItem("token");
   const cartLength = useSelector((state) => state.cart.value.length);
+
+  const clearLocalItems = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("isAdmin");
+  };
   return (
     <nav
       className="navbar navbar-expand-lg bg-body-tertiary sticky-top"
@@ -42,7 +47,36 @@ function Header() {
               </Link>
             </li>
 
-            {!token && (
+            {token ? (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Profile
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Your orders
+                    </a>
+                  </li>
+                  <li onClick={clearLocalItems}>
+                    <a className="dropdown-item" href={FRONT_END_URL}>
+                      Log out
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            ) : (
               <li className="nav-item">
                 <Link className="nav-link" to={"/signIn"}>
                   <i className="fas fa-user me-1"></i>
@@ -50,34 +84,36 @@ function Header() {
                 </Link>
               </li>
             )}
-            {/* <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown link
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li> */}
+            {/* {token && (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Profile
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Your orders
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            )} */}
           </ul>
         </div>
       </div>
