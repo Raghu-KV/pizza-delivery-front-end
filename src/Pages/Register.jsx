@@ -1,8 +1,11 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
+import { BACK_END_URL } from "../URL";
+import { useState } from "react";
 
 function Register() {
+  const [message, setMessage] = useState("");
   const formik = useFormik({
     initialValues: {
       userName: "",
@@ -23,8 +26,15 @@ function Register() {
         .min(7, "Password must be 7 character or above")
         .required("Passwored is Required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      const responce = await fetch(`${BACK_END_URL}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const convertedResponce = await responce.json();
+      setMessage(convertedResponce.message);
     },
   });
 
@@ -105,6 +115,7 @@ function Register() {
       <p>
         Already have an account try <Link to={"/signIn"}>SIGN IN</Link>{" "}
       </p>
+      <p className="text-success fw-semibold fs-4">{message}</p>
     </div>
   );
 }

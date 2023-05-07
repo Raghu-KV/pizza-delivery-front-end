@@ -44,17 +44,19 @@ function Cart() {
           </div>
         </div>
 
-        <div className="col-sm-12 col-md-12 col-lg-4 bg-primary-subtle h-25 rounded-4 text-center py-3">
-          <h6>Net price : {price}</h6>
-          <h6>GST @5% : {percentageInPrice}</h6>
-          <h6>Total price : {priceAfterTax}</h6>
-          <button
-            type="button"
-            class="btn btn-dark d-block"
-            style={{ width: "100%" }}
-          >
-            PAY NOW
-          </button>
+        <div className="col-sm-12 col-md-12 col-lg-4">
+          <div className="mt-3 mx-3 px-3 rounded-4 text-center py-3 bg-primary-subtle">
+            <h6>Net price : {price}</h6>
+            <h6>GST @5% : {percentageInPrice}</h6>
+            <h6>Total price : {priceAfterTax}</h6>
+            <button
+              type="button"
+              className="btn btn-dark d-block"
+              style={{ width: "100%" }}
+            >
+              PAY NOW
+            </button>
+          </div>
         </div>
       </div>
     );

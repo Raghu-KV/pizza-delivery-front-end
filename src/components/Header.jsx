@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Header() {
+  const token = localStorage.getItem("token");
   const cartLength = useSelector((state) => state.cart.value.length);
   return (
     <nav
@@ -31,12 +32,6 @@ function Header() {
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link className="nav-link" to={"/signIn"}>
-                <i className="fas fa-user me-1"></i>
-                Sign In
-              </Link>
-            </li>
             <li className="nav-item ">
               <Link className="nav-link" to={"/cart"}>
                 <i className="fas fa-shopping-cart me-1"></i>
@@ -46,6 +41,15 @@ function Header() {
                 </span>
               </Link>
             </li>
+
+            {!token && (
+              <li className="nav-item">
+                <Link className="nav-link" to={"/signIn"}>
+                  <i className="fas fa-user me-1"></i>
+                  Sign In
+                </Link>
+              </li>
+            )}
             {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
