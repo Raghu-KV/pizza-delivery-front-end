@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-  const [res, setRes] = useState({ message: "h" });
+  const [res, setRes] = useState({ message: "" });
   const formik = useFormik({
     initialValues: {
       userName: "",
