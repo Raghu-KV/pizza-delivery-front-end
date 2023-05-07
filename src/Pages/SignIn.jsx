@@ -1,45 +1,62 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
+import { BACK_END_URL, FRONT_END_URL } from "../URL";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+  const [res, setRes] = useState({ message: "h" });
   const formik = useFormik({
     initialValues: {
-      email: "",
+      userName: "",
       password: "",
     },
     validationSchema: yup.object({
-      email: yup
-        .string()
-        .required("Emil is Required")
-        .email("should be a vailed email"),
+      userName: yup.string().required("user name is Required"),
+
       password: yup.string().required("Passwored is Required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      //console.log(values);
+      const responce = await fetch(`${BACK_END_URL}/signIn`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await responce.json();
+      console.log(data);
+      setRes(data);
     },
   });
+  const navigate = useNavigate();
+
+  if (res.token) {
+    localStorage.setItem("token", res.token);
+    localStorage.setItem("isAdmin", res.isAdmin);
+    window.location = `${FRONT_END_URL}`;
+  }
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
+            User name
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control border border-black"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            name="email"
-            value={formik.values.email}
+            name="userName"
+            value={formik.values.userName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.email && formik.errors.email ? (
+          {formik.touched.userName && formik.errors.userName ? (
             <div id="emailHelp" className="form-text text-danger">
-              {formik.errors.email}
+              {formik.errors.userName}
             </div>
           ) : null}
         </div>
@@ -77,6 +94,7 @@ function SignIn() {
       <p>
         Don't have an account try <Link to={"/register"}>REGISTER</Link>{" "}
       </p>
+      <p>{res.message}</p>
     </div>
   );
 }
