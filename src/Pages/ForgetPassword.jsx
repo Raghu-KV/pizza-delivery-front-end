@@ -18,13 +18,13 @@ function ForgetPassword() {
     }),
     onSubmit: async (values) => {
       console.log(values);
-      //   const responce = await fetch(`${BACK_END_URL}/register`, {
-      //     method: "POST",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify(values),
-      //   });
-      //   const convertedResponce = await responce.json();
-      //   setMessage(convertedResponce.message);
+      const responce = await fetch(`${BACK_END_URL}/forgetPassword`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const convertedResponce = await responce.json();
+      setMessage(convertedResponce.message);
     },
   });
 
