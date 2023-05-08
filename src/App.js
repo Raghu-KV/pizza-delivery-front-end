@@ -11,6 +11,8 @@ import Cart from "./Pages/Cart";
 import SignIn from "./Pages/SignIn";
 import Register from "./Pages/Register";
 import AccountVerify from "./Pages/AccountVerify";
+import ForgetPassword from "./Pages/ForgetPassword";
+import AccountRecovery from "./Pages/AccountRecovery";
 
 function App() {
   return (
@@ -24,6 +26,11 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/register" element={<Register />} />
             <Route path="/accountVerify/:id" element={<AccountVerify />} />
+            <Route
+              path="/accountRecovery/:id/:token"
+              element={<AccountRecovery />}
+            />
+            <Route path="/forgetPassword" element={<ForgetPassword />} />
           </Routes>
         </div>
       </main>

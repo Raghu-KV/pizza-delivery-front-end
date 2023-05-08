@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { BACK_END_URL } from "../URL";
+import { BACK_END_URL, FRONT_END_URL } from "../URL";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 function AccountVerify() {
@@ -25,12 +25,12 @@ function AccountVerify() {
     return (
       <div className="text-center">
         <h3>your account verified successfully</h3>
-        <Link to={"/"} className="p-1">
+        <a href={`${FRONT_END_URL}`} className="p-1">
           HOME
-        </Link>
-        <Link to={"/cart"} className="p-1">
+        </a>
+        <a href={`${FRONT_END_URL}/cart`} className="p-1">
           CART
-        </Link>
+        </a>
       </div>
     );
   } else if (res.message === "no") {

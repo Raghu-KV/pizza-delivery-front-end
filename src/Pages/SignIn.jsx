@@ -88,7 +88,7 @@ function SignIn() {
           Submit
         </button>
         <span style={{ fontSize: "15px" }} className="ms-3">
-          Forget Password
+          <Link to={"/forgetPassword"}>Forget Password</Link>
         </span>
       </form>
       <p>
