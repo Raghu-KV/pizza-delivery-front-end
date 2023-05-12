@@ -3,6 +3,8 @@ import CartSingleItem from "../components/CartSingleItem";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux_reducers/cart";
+import { useNavigate } from "react-router-dom";
+import { BACK_END_URL } from "../URL";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.value);
@@ -33,6 +35,23 @@ function Cart() {
   //GST----------------------------------
   const percentageInPrice = (price * 5) / 100;
   const priceAfterTax = Math.round(price + percentageInPrice);
+  //--------------------------------------
+
+  //pay now function -----------------------
+  const navigate = useNavigate();
+  const handlePayNow = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("user in logged in we can proceeed", token);
+      const responce = await fetch(`${BACK_END_URL}/orders`, {
+        method: "POST",
+      });
+      const paymentDetails = await responce.json();
+      console.log(paymentDetails);
+    } else {
+      navigate("/signIn");
+    }
+  };
   if (cart.length > 0) {
     return (
       <div className="row">
@@ -53,6 +72,7 @@ function Cart() {
               type="button"
               className="btn btn-dark d-block"
               style={{ width: "100%" }}
+              onClick={handlePayNow}
             >
               PAY NOW
             </button>
