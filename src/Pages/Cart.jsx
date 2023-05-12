@@ -39,6 +39,31 @@ function Cart() {
 
   //pay now function -----------------------
   const navigate = useNavigate();
+
+  const initPayment = (data) => {
+    const options = {
+      key: "rzp_test_5ldscDerXOP0P0",
+      amount: data.amount,
+      currency: data.currency,
+      name: "front end test name",
+      //image:"needed"
+      discription: "front end test discription",
+      order_id: data.id,
+      handler: async (responce) => {
+        const res = await fetch(`${BACK_END_URL}/verify`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(responce),
+        });
+        const convertedRes = await res.json();
+        console.log(convertedRes);
+      },
+      theme: "#3355dc",
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
   const handlePayNow = async () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -48,10 +73,13 @@ function Cart() {
       });
       const paymentDetails = await responce.json();
       console.log(paymentDetails);
+
+      initPayment(paymentDetails);
     } else {
       navigate("/signIn");
     }
   };
+
   if (cart.length > 0) {
     return (
       <div className="row">
