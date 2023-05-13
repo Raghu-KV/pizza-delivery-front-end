@@ -58,7 +58,7 @@ function Cart() {
         const convertedRes = await res.json();
         console.log(convertedRes);
       },
-      theme: "#3355dc",
+      theme: "#023047",
     };
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
@@ -68,8 +68,11 @@ function Cart() {
     const token = localStorage.getItem("token");
     if (token) {
       console.log("user in logged in we can proceeed", token);
+
       const responce = await fetch(`${BACK_END_URL}/orders`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cart),
       });
       const paymentDetails = await responce.json();
       console.log(paymentDetails);
