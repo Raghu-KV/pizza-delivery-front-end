@@ -41,6 +41,7 @@ function Cart() {
   const navigate = useNavigate();
 
   const initPayment = (data) => {
+    const token = localStorage.getItem("token");
     const options = {
       key: "rzp_test_5ldscDerXOP0P0",
       amount: data.amount,
@@ -50,10 +51,12 @@ function Cart() {
       discription: "front end test discription",
       order_id: data.id,
       handler: async (responce) => {
-        const res = await fetch(`${BACK_END_URL}/verify`, {
+        console.log(responce, "line 53");
+        const toSendDataWithToken = { ...responce, token: token };
+        const res = await fetch(`${BACK_END_URL}/razorpay/verify`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(responce),
+          body: JSON.stringify(toSendDataWithToken),
         });
         const convertedRes = await res.json();
         console.log(convertedRes);
@@ -69,7 +72,7 @@ function Cart() {
     if (token) {
       console.log("user in logged in we can proceeed", token);
 
-      const responce = await fetch(`${BACK_END_URL}/orders`, {
+      const responce = await fetch(`${BACK_END_URL}/razorpay/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cart),
