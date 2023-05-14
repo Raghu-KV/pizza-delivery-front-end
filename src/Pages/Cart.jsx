@@ -52,7 +52,7 @@ function Cart() {
       order_id: data.id,
       handler: async (responce) => {
         console.log(responce, "line 53");
-        const toSendDataWithToken = { ...responce, token: token };
+        const toSendDataWithToken = { ...responce, token: token, cart: cart };
         const res = await fetch(`${BACK_END_URL}/razorpay/verify`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
