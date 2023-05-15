@@ -6,13 +6,14 @@ import { useEffect } from "react";
 import { saveAllProducts } from "../redux_reducers/product";
 import { addToCart } from "../redux_reducers/cart";
 import { useState } from "react";
+import { BACK_END_URL } from "../URL";
 
 function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.value);
 
   const allProducts = async () => {
-    const responce = await fetch("http://localhost:4000/products");
+    const responce = await fetch(`${BACK_END_URL}/products`);
     const data = await responce.json();
     console.log(data);
     dispatch(saveAllProducts(data));
