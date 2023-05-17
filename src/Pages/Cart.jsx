@@ -81,6 +81,7 @@ function Cart() {
       console.log(paymentDetails);
 
       initPayment(paymentDetails);
+      //localStorage.removeItem("cart");
     } else {
       navigate("/signIn");
     }

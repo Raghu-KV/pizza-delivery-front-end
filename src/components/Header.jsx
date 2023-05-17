@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { FRONT_END_URL } from "../URL";
 function Header() {
   const token = localStorage.getItem("token");
+  const admin = localStorage.getItem("isAdmin");
+  const isAdmin = JSON.parse(admin);
   const cartLength = useSelector((state) => state.cart.value.length);
 
   const clearLocalItems = () => {
@@ -70,11 +72,6 @@ function Header() {
                       Log out
                     </a>
                   </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
                 </ul>
               </li>
             ) : (
@@ -85,7 +82,7 @@ function Header() {
                 </Link>
               </li>
             )}
-            {/* {token && (
+            {token && isAdmin ? (
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -114,7 +111,7 @@ function Header() {
                   </li>
                 </ul>
               </li>
-            )} */}
+            ) : null}
           </ul>
         </div>
       </div>
