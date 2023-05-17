@@ -13,6 +13,7 @@ import Register from "./Pages/Register";
 import AccountVerify from "./Pages/AccountVerify";
 import ForgetPassword from "./Pages/ForgetPassword";
 import AccountRecovery from "./Pages/AccountRecovery";
+import Orders from "./Pages/Orders";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               element={<AccountRecovery />}
             />
             <Route path="/forgetPassword" element={<ForgetPassword />} />
+            <Route path="/orders" element={<Orders />} />
           </Routes>
         </div>
       </main>

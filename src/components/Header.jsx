@@ -8,6 +8,7 @@ function Header() {
   const clearLocalItems = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("userId");
   };
   return (
     <nav
@@ -60,9 +61,9 @@ function Header() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to={"/orders"}>
                       Your orders
-                    </a>
+                    </Link>
                   </li>
                   <li onClick={clearLocalItems}>
                     <a className="dropdown-item" href={FRONT_END_URL}>

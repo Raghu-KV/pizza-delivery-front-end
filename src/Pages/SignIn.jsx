@@ -4,8 +4,11 @@ import * as yup from "yup";
 import { BACK_END_URL, FRONT_END_URL } from "../URL";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { inputUserId } from "../redux_reducers/userId";
+import { useDispatch } from "react-redux";
 
 function SignIn() {
+  const dispatch = useDispatch();
   const [res, setRes] = useState({ message: "" });
   const formik = useFormik({
     initialValues: {
@@ -27,6 +30,8 @@ function SignIn() {
       const data = await responce.json();
       console.log(data);
       setRes(data);
+      //dispatch(inputUserId(data.userId));
+      localStorage.setItem("userId", data.userId);
     },
   });
   const navigate = useNavigate();
