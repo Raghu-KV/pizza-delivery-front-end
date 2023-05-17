@@ -9,12 +9,14 @@ import { Provider } from "react-redux";
 import productReducers from "./redux_reducers/product";
 import cartReducer from "./redux_reducers/cart";
 import userReducer from "./redux_reducers/userId";
+import ordersReducer from "./redux_reducers/orders";
 
 const store = configureStore({
   reducer: {
     products: productReducers,
     cart: cartReducer,
     userId: userReducer,
+    orders: ordersReducer,
   },
 });
 
