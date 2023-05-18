@@ -91,17 +91,17 @@ function Header() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Profile
+                  Admin operations
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Your orders
-                    </a>
+                    <Link className="dropdown-item" to={"/addProduct"}>
+                      Add a product
+                    </Link>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      Another action
+                      All orders
                     </a>
                   </li>
                   <li>
