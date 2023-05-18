@@ -1,7 +1,11 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { BACK_END_URL } from "../URL";
+import { useState } from "react";
 
 function AddProduct() {
+  const [message, setMessage] = useState("");
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -27,8 +31,17 @@ function AddProduct() {
         .min(1, "must be a grater than 1")
         .required("quantity required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values, actions) => {
+      //console.log(values);
+      const token = localStorage.getItem("token");
+      const responce = await fetch(`${BACK_END_URL}/addProduct`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-auth-token": token },
+        body: JSON.stringify(values),
+      });
+      const data = await responce.json();
+      setMessage(data.message);
+      actions.resetForm();
     },
   });
 
@@ -125,6 +138,7 @@ function AddProduct() {
           Submit
         </button>
       </form>
+      <p>{message}</p>
     </div>
   );
 }
