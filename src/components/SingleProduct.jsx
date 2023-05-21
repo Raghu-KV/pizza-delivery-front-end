@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux_reducers/cart";
 import { useState, useEffect } from "react";
+import { BACK_END_URL } from "../URL";
+import { useNavigate } from "react-router-dom";
 
-function SingleProduct({ product }) {
+function SingleProduct({ product, allProducts }) {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [toDelete, setToDelete] = useState("Delete");
 
   useEffect(() => {
     cart.map((item) => {
@@ -15,6 +18,9 @@ function SingleProduct({ product }) {
       }
     });
   }, [cart]);
+
+  const getIsAdmin = localStorage.getItem("isAdmin");
+  const isAdmin = JSON.parse(getIsAdmin);
 
   const addItemToCart = (product) => {
     const productWithQuantanty = { ...product, quantity: 1 };
@@ -26,6 +32,20 @@ function SingleProduct({ product }) {
     localStorage.setItem("cart", JSON.stringify(newCartItems));
     dispatch(addToCart(newCartItems));
   };
+
+  const token = localStorage.getItem("token");
+
+  const handleDelete = async () => {
+    setToDelete("Loading...");
+    await fetch(`${BACK_END_URL}/deleteProduct/${product._id}`, {
+      method: "DELETE",
+      headers: { "x-auth-token": token },
+    });
+
+    await allProducts();
+  };
+
+  const navigate = useNavigate();
 
   return (
     <div className="col-12 col-md-6 col-lg-4 col-xxl-3">
@@ -46,6 +66,24 @@ function SingleProduct({ product }) {
           >
             {isButtonDisabled ? "Added to Cart" : "Add to Cart"}
           </button>
+          {isAdmin && (
+            <div className="mt-1">
+              <span
+                role="button"
+                className="badge text-bg-secondary me-1"
+                onClick={() => navigate(`/editProduct/${product._id}`)}
+              >
+                Edit or Change qty
+              </span>
+              <span
+                role="button"
+                className="badge text-bg-danger ms-1"
+                onClick={handleDelete}
+              >
+                {toDelete}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

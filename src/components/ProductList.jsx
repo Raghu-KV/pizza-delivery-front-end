@@ -36,7 +36,11 @@ function ProductList() {
   return (
     <div className="row g-4">
       {products.map((product) => (
-        <SingleProduct product={product} key={product._id} />
+        <SingleProduct
+          product={product}
+          key={product._id}
+          allProducts={allProducts}
+        />
       ))}
     </div>
   );

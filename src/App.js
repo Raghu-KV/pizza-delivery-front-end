@@ -15,6 +15,7 @@ import ForgetPassword from "./Pages/ForgetPassword";
 import AccountRecovery from "./Pages/AccountRecovery";
 import Orders from "./Pages/Orders";
 import AddProduct from "./Pages/AddProduct";
+import EditProduct from "./Pages/EditProduct";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/forgetPassword" element={<ForgetPassword />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/addProduct" element={<AddProduct />} />
+            <Route path="/editProduct/:id" element={<EditProduct />} />
           </Routes>
         </div>
       </main>
