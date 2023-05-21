@@ -8,7 +8,7 @@ import SingleOrders from "../components/SingleOrders";
 
 function Orders() {
   const orders = useSelector((state) => state.orders.value);
-  const ordersReverse = orders.reverse();
+  //orders.reverse();
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
   console.log(userId);
@@ -18,7 +18,8 @@ function Orders() {
     const responce = await fetch(`${BACK_END_URL}/orders/${userId}`);
     const ordersData = await responce.json();
     //console.log(ordersData);
-    dispatch(addItemToOrders(ordersData));
+    const changed = ordersData.reverse();
+    dispatch(addItemToOrders(changed));
   };
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function Orders() {
         <h3>Your Orders 😋</h3>
 
         <div className="row g-4 mt-3">
-          {ordersReverse.map((order) => (
+          {orders.map((order) => (
             <SingleOrders order={order} key={order._id} />
           ))}
         </div>
