@@ -95,14 +95,14 @@ function Header() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to={"/addProduct"}>
+                    <Link className="dropdown-item" to={"admin/addProduct"}>
                       Add a product
                     </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to={"admin/allOrders"}>
                       All orders
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">

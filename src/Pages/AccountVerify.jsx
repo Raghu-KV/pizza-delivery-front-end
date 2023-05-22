@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { BACK_END_URL, FRONT_END_URL } from "../URL";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { inputUserId } from "../redux_reducers/userId";
+import { inputUserId } from "../redux_reducers/allOrders";
 import { useDispatch } from "react-redux";
 
 function AccountVerify() {

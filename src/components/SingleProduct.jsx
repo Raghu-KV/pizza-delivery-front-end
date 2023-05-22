@@ -71,7 +71,7 @@ function SingleProduct({ product, allProducts }) {
               <span
                 role="button"
                 className="badge text-bg-secondary me-1"
-                onClick={() => navigate(`/editProduct/${product._id}`)}
+                onClick={() => navigate(`admin/editProduct/${product._id}`)}
               >
                 Edit or Change qty
               </span>

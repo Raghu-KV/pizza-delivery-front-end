@@ -16,6 +16,7 @@ import AccountRecovery from "./Pages/AccountRecovery";
 import Orders from "./Pages/Orders";
 import AddProduct from "./Pages/AddProduct";
 import EditProduct from "./Pages/EditProduct";
+import AdminAllOrders from "./Pages/AdminAllOrders";
 
 function App() {
   return (
@@ -35,8 +36,9 @@ function App() {
             />
             <Route path="/forgetPassword" element={<ForgetPassword />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/addProduct" element={<AddProduct />} />
-            <Route path="/editProduct/:id" element={<EditProduct />} />
+            <Route path="admin/addProduct" element={<AddProduct />} />
+            <Route path="admin/editProduct/:id" element={<EditProduct />} />
+            <Route path="admin/allOrders" element={<AdminAllOrders />} />
           </Routes>
         </div>
       </main>
