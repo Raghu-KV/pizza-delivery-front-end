@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { BACK_END_URL } from "../URL";
 import { useDispatch } from "react-redux";
 import { reduxAddAllOrders } from "../redux_reducers/allOrders";
+import { useSelector } from "react-redux";
 
 function AdminAllOrders() {
+  const allOrders = useSelector((state) => state.allOrders.value);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -21,7 +23,7 @@ function AdminAllOrders() {
   useEffect(() => {
     fetchAllOrders();
   }, []);
-
+  console.log(allOrders);
   return <div>AdminAllOrders</div>;
 }
 
