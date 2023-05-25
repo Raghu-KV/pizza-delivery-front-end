@@ -68,6 +68,7 @@ function SingleProduct({ product, allProducts }) {
           </button>
           {isAdmin && (
             <div className="mt-1">
+              <h5>remaing qty : {product.countInStock}</h5>
               <span
                 role="button"
                 className="badge text-bg-secondary me-1"
