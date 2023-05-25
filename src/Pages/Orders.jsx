@@ -20,6 +20,7 @@ function Orders() {
     //console.log(ordersData);
     const changed = ordersData.reverse();
     dispatch(addItemToOrders(changed));
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -40,7 +41,13 @@ function Orders() {
       </div>
     );
   } else {
-    return <h3>{loading ? "loading..." : "you dont have any orders"}</h3>;
+    return (
+      <h3>
+        {!loading && orders.length === 0
+          ? "you dont have any orders..."
+          : "loading..."}
+      </h3>
+    );
   }
 }
 
