@@ -17,6 +17,7 @@ import Orders from "./Pages/Orders";
 import AddProduct from "./Pages/AddProduct";
 import EditProduct from "./Pages/EditProduct";
 import AdminAllOrders from "./Pages/AdminAllOrders";
+import CustomPizza from "./Pages/CustomPizza";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="admin/addProduct" element={<AddProduct />} />
             <Route path="admin/editProduct/:id" element={<EditProduct />} />
             <Route path="admin/allOrders" element={<AdminAllOrders />} />
+            <Route path="customPizza" element={<CustomPizza />} />
           </Routes>
         </div>
       </main>

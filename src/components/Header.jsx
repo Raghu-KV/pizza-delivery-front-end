@@ -63,6 +63,11 @@ function Header() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
+                    <Link className="dropdown-item" to={"/customPizza"}>
+                      Custom pizza
+                    </Link>
+                  </li>
+                  <li>
                     <Link className="dropdown-item" to={"/orders"}>
                       Your orders
                     </Link>
