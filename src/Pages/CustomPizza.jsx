@@ -9,6 +9,7 @@ function CustomPizza() {
   const formik = useFormik({
     initialValues: {
       pizzaBase: "Stuffed crust",
+      pizzaSauce: "Pesto",
       email: "",
       password: "",
     },
@@ -23,13 +24,16 @@ function CustomPizza() {
             "Thin crust",
             "Cheese crust",
           ],
-          "not valid"
+          "select  a valid base"
         )
         .required("pizza base is required"),
-      email: yup
+      pizzaSauce: yup
         .string()
-        .required("Emil is Required")
-        .email("should be a vailed email"),
+        .oneOf(
+          ["Pesto", "White garlic sauce", "Hummus", "Onion", "Chilli"],
+          "select  a valid sauce"
+        )
+        .required("pizza sauce is required"),
       password: yup
         .string()
         .min(7, "Password must be 7 character or above")
@@ -66,6 +70,33 @@ function CustomPizza() {
           {formik.touched.pizzaBase && formik.errors.pizzaBase ? (
             <div id="emailHelp" className="form-text text-danger">
               {formik.errors.pizzaBase}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="pizzaSauce" className="form-label">
+            Pizza Sauce
+          </label>
+          <select
+            className="form-select border border-black"
+            type="text"
+            id="pizzaSauce"
+            aria-describedby="namelHelp"
+            name="pizzaSauce"
+            value={formik.values.pizzaSauce}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          >
+            <option value="Pesto">Pesto</option>
+            <option value="White garlic sauce">White Garilc Sauce</option>
+            <option value="Hummus">Hummus</option>
+            <option value="Onion">Onion</option>
+            <option value="Chilli">Chilli</option>
+          </select>
+          {formik.touched.pizzaSauce && formik.errors.pizzaSauce ? (
+            <div id="emailHelp" className="form-text text-danger">
+              {formik.errors.pizzaSauce}
             </div>
           ) : null}
         </div>
