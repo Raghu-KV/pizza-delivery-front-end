@@ -8,8 +8,8 @@ function CustomPizza() {
   const [message, setMessage] = useState("");
   const formik = useFormik({
     initialValues: {
-      pizzaBase: "Stuffed crust",
-      pizzaSauce: "Pesto",
+      pizzaBase: "--SELECT BASE--",
+      pizzaSauce: "--SELECT SAUCE--",
       email: "",
       password: "",
     },
@@ -24,7 +24,7 @@ function CustomPizza() {
             "Thin crust",
             "Cheese crust",
           ],
-          "select  a valid base"
+          "select a valid base"
         )
         .required("pizza base is required"),
       pizzaSauce: yup
@@ -61,6 +61,7 @@ function CustomPizza() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           >
+            <option value="">--SELECT BASE--</option>
             <option value="Stuffed crust">Stuffed Crust</option>
             <option value="Cracker crust">Cracker Crust</option>
             <option value="Flat bread crust">Flat Bread Crust</option>
@@ -88,6 +89,7 @@ function CustomPizza() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           >
+            <option value="">--SELECT SAUCE--</option>
             <option value="Pesto">Pesto</option>
             <option value="White garlic sauce">White Garilc Sauce</option>
             <option value="Hummus">Hummus</option>
