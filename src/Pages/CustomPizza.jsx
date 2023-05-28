@@ -10,8 +10,8 @@ function CustomPizza() {
     initialValues: {
       pizzaBase: "--SELECT BASE--",
       pizzaSauce: "--SELECT SAUCE--",
-      email: "",
-      password: "",
+      cheese: "--SELECT CHEESE--",
+      veggies: [],
     },
     validationSchema: yup.object({
       pizzaBase: yup
@@ -34,10 +34,13 @@ function CustomPizza() {
           "select  a valid sauce"
         )
         .required("pizza sauce is required"),
-      password: yup
+      cheese: yup
         .string()
-        .min(7, "Password must be 7 character or above")
-        .required("Passwored is Required"),
+        .oneOf(
+          ["Gorgonzola", "Provolone", "Emmental", "Cheddar"],
+          "select  a valid cheese"
+        )
+        .required("pizza cheese is required"),
     }),
     onSubmit: async (values) => {
       console.log(values);
@@ -104,6 +107,33 @@ function CustomPizza() {
         </div>
 
         <div className="mb-3">
+          <label htmlFor="pizzaSauce" className="form-label">
+            Cheese
+          </label>
+          <select
+            className="form-select border border-black"
+            type="text"
+            id="cheese"
+            aria-describedby="namelHelp"
+            name="cheese"
+            value={formik.values.cheese}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          >
+            <option value="">--SELECT CHEESE--</option>
+            <option value="Gorgonzola">Gorgonzola</option>
+            <option value="Provolone">Provolone</option>
+            <option value="Emmental">Emmental</option>
+            <option value="Cheddar">Cheddar</option>
+          </select>
+          {formik.touched.cheese && formik.errors.cheese ? (
+            <div id="emailHelp" className="form-text text-danger">
+              {formik.errors.cheese}
+            </div>
+          ) : null}
+        </div>
+
+        {/* <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
@@ -123,6 +153,7 @@ function CustomPizza() {
             </div>
           ) : null}
         </div>
+
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
@@ -141,7 +172,7 @@ function CustomPizza() {
               {formik.errors.password}
             </div>
           ) : null}
-        </div>
+        </div> */}
 
         <button
           type="submit"
