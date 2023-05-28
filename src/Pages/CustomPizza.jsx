@@ -11,7 +11,7 @@ function CustomPizza() {
       pizzaBase: "--SELECT BASE--",
       pizzaSauce: "--SELECT SAUCE--",
       cheese: "--SELECT CHEESE--",
-      veggies: [],
+      veggies: [""],
     },
     validationSchema: yup.object({
       pizzaBase: yup
@@ -131,6 +131,23 @@ function CustomPizza() {
               {formik.errors.cheese}
             </div>
           ) : null}
+        </div>
+
+        <div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="inlineCheckbox1"
+              name={veggies[0]}
+              value={formik.values.veggies[0]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            <label className="form-check-label" htmlFor="inlineCheckbox1">
+              1
+            </label>
+          </div>
         </div>
 
         {/* <div className="mb-3">
