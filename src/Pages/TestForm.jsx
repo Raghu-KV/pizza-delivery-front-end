@@ -31,7 +31,7 @@ function TestForm() {
   //     },
   //   });
 
-  const initialValues = { userName: "", email: "", password: "" };
+  const initialValues = { userName: "", email: "", password: "", comments: "" };
   const validationSchema = yup.object({
     userName: yup
       .string()
@@ -110,6 +110,18 @@ function TestForm() {
               {formik.errors.password}
             </div>
           ) : null} */}
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="comments" className="form-lable">
+            comments
+          </label>
+          <Field
+            as="textarea"
+            name="comments"
+            id="commente"
+            className="form-control border border-black"
+          />
         </div>
 
         <button type="submit" className="btn btn-primary">
