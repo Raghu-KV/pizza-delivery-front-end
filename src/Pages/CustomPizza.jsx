@@ -60,9 +60,7 @@ function CustomPizza() {
             id="pizzaBase"
             aria-describedby="namelHelp"
             name="pizzaBase"
-            value={formik.values.pizzaBase}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("pizzaBase")}
           >
             <option value="">--SELECT BASE--</option>
             <option value="Stuffed crust">Stuffed Crust</option>
@@ -133,7 +131,7 @@ function CustomPizza() {
           ) : null}
         </div>
 
-        <div>
+        {/* <div>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
@@ -148,7 +146,7 @@ function CustomPizza() {
               1
             </label>
           </div>
-        </div>
+        </div> */}
 
         {/* <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
