@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { BACK_END_URL } from "../URL";
 import { useState } from "react";
+import DeleteTextError from "../components/DeleteTextError";
 
 function TestForm() {
   const [message, setMessage] = useState("");
@@ -31,7 +32,13 @@ function TestForm() {
   //     },
   //   });
 
-  const initialValues = { userName: "", email: "", password: "", comments: "" };
+  const initialValues = {
+    userName: "",
+    email: "",
+    password: "",
+    comments: "",
+    address: "",
+  };
   const validationSchema = yup.object({
     userName: yup
       .string()
@@ -45,6 +52,12 @@ function TestForm() {
       .string()
       .min(7, "Password must be 7 character or above")
       .required("Passwored is Required"),
+    comments: yup
+      .string()
+      .min(10, "should be at least above 10 character")
+      .max(20, "comment should not be above 20 character")
+      .required("comments is required"),
+    address: yup.string().required("address is required"),
   });
 
   const formSubmit = (values) => {
@@ -73,7 +86,7 @@ function TestForm() {
               {formik.errors.userName}
             </div>
           ) : null} */}
-          <ErrorMessage name="userName" />
+          <ErrorMessage name="userName" component={DeleteTextError} />
         </div>
 
         <div className="mb-3">
@@ -86,7 +99,11 @@ function TestForm() {
             id="exampleInputEmail1"
             name="email"
           />
-          <ErrorMessage name="email" />
+          <ErrorMessage name="email">
+            {(errorMessage) => (
+              <div className="text-danger">{errorMessage}</div>
+            )}
+          </ErrorMessage>
           {/* {formik.touched.email && formik.errors.email ? (
             <div id="emailHelp" className="form-text text-danger">
               {formik.errors.email}
@@ -122,6 +139,30 @@ function TestForm() {
             id="commente"
             className="form-control border border-black"
           />
+          <ErrorMessage name="comments" />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="address" className="form-lable">
+            address
+          </label>
+          <Field name="address">
+            {(props) => {
+              console.log(props);
+              const { field, meta, form } = props;
+              return (
+                <div>
+                  <input
+                    type="test"
+                    className="form-control border border-black"
+                    {...field}
+                  />
+                  {meta.touched && meta.error ? (
+                    <div className="text-danger">{meta.error}</div>
+                  ) : null}
+                </div>
+              );
+            }}
+          </Field>
         </div>
 
         <button type="submit" className="btn btn-primary">
