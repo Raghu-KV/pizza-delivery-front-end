@@ -172,9 +172,9 @@ function TestForm() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="facebook" className="form-lable">
+          <lable htmlFor="facebook" className="form-lable">
             Facebook
-          </label>
+          </lable>
           <Field
             id="facebook"
             name="social.facebook"
@@ -236,6 +236,7 @@ function TestForm() {
                       <Field type="number" name={`singleData[${index}]`} />
 
                       <button onClick={() => push("")}>add</button>
+
                       {index > 0 && (
                         <button onClick={() => remove(index)}>delete</button>
                       )}
