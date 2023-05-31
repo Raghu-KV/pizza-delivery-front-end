@@ -38,6 +38,10 @@ function TestForm() {
     password: "",
     comments: "",
     address: "",
+    socila: {
+      facebook: "",
+      twitter: "",
+    },
   };
   const validationSchema = yup.object({
     userName: yup
@@ -163,6 +167,26 @@ function TestForm() {
               );
             }}
           </Field>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="facebook" className="form-lable" />
+          <Field
+            id="facebook"
+            name="social.facebook"
+            className="form-control border border-black"
+            type="text"
+          />
+        </div>
+
+        <div className="mb-3">
+          <lable htmlFor="twitter" className="form-lable" />
+          <Field
+            id="twitter"
+            name="social.twitter"
+            type="number"
+            className="form-control border border-black"
+          />
         </div>
 
         <button type="submit" className="btn btn-primary">
