@@ -38,10 +38,11 @@ function TestForm() {
     password: "",
     comments: "",
     address: "",
-    socila: {
+    social: {
       facebook: "",
       twitter: "",
     },
+    phomeNumber: ["", ""],
   };
   const validationSchema = yup.object({
     userName: yup
@@ -170,7 +171,9 @@ function TestForm() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="facebook" className="form-lable" />
+          <label htmlFor="facebook" className="form-lable">
+            Facebook
+          </label>
           <Field
             id="facebook"
             name="social.facebook"
@@ -180,12 +183,38 @@ function TestForm() {
         </div>
 
         <div className="mb-3">
-          <lable htmlFor="twitter" className="form-lable" />
+          <lable htmlFor="twitter" className="form-lable">
+            Twitter
+          </lable>
           <Field
             id="twitter"
             name="social.twitter"
             type="number"
             className="form-control border border-black"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="phoneNumber1" className="form-lable">
+            Pirmary phone No.
+          </label>
+          <Field
+            name="phoneNumber[0]"
+            id="phoneNumber1"
+            className="form-control border border-black"
+            type="number"
+          />
+        </div>
+
+        <div className="mb-3">
+          <lable className="form-lable" htmlFor="phoneNumber2">
+            Secondary phone number
+          </lable>
+          <Form
+            name="phoneNumber[1]"
+            id="phoneNumber2"
+            className="form-control border border-black"
+            type="number"
           />
         </div>
 
