@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { BACK_END_URL } from "../URL";
@@ -43,6 +43,7 @@ function TestForm() {
       twitter: "",
     },
     phomeNumber: ["", ""],
+    anotherPhNumber: [""],
   };
   const validationSchema = yup.object({
     userName: yup
@@ -210,12 +211,40 @@ function TestForm() {
           <lable className="form-lable" htmlFor="phoneNumber2">
             Secondary phone number
           </lable>
-          <Form
+          <Field
             name="phoneNumber[1]"
             id="phoneNumber2"
             className="form-control border border-black"
             type="number"
           />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="anotherPhNuber" className="from-lable">
+            Add phone numbers
+          </label>
+          <FieldArray name="anotherPhNumber">
+            {(fieldArrayProps) => {
+              console.log("fiels array prop", fieldArrayProps);
+              const { form, push, remove } = fieldArrayProps;
+              const { values } = form;
+              const { anotherPhNumber } = values;
+              return (
+                <div>
+                  {anotherPhNumber.map((singleData, index) => (
+                    <div>
+                      <Field type="number" name={`singleData[${index}]`} />
+
+                      <button onClick={() => push("")}>add</button>
+                      {index > 0 && (
+                        <button onClick={() => remove(index)}>delete</button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
         </div>
 
         <button type="submit" className="btn btn-primary">
