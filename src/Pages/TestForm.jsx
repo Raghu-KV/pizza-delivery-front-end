@@ -121,7 +121,7 @@ function TestForm() {
             id="exampleInputPassword1"
             name="password"
           />
-          <ErrorMessage name="password" />
+          <ErrorMessage name="password" component={DeleteTextError} />
           {/* {formik.touched.password && formik.errors.password ? (
             <div id="emailHelp" className="form-text text-danger">
               {formik.errors.password}
