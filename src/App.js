@@ -19,6 +19,7 @@ import EditProduct from "./Pages/EditProduct";
 import AdminAllOrders from "./Pages/AdminAllOrders";
 import CustomPizza from "./Pages/CustomPizza";
 import TestForm from "./Pages/TestForm";
+import AnotherTestForm from "./Pages/AnotherTestForm";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/admin/allOrders" element={<AdminAllOrders />} />
             <Route path="/customPizza" element={<CustomPizza />} />
             <Route path="/testForm" element={<TestForm />} />
+            <Route path="/testForm2" element={<AnotherTestForm />} />
           </Routes>
         </div>
       </main>

@@ -42,7 +42,7 @@ function TestForm() {
       facebook: "",
       twitter: "",
     },
-    phomeNumber: ["", ""],
+    phoneNumber: ["", ""],
     anotherPhNumber: [""],
   };
   const validationSchema = yup.object({
@@ -220,9 +220,9 @@ function TestForm() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="anotherPhNuber" className="from-lable">
+          <lable htmlFor="anotherPhNuber" className="from-lable">
             Add phone numbers
-          </label>
+          </lable>
           <FieldArray name="anotherPhNumber">
             {(fieldArrayProps) => {
               console.log("fiels array prop", fieldArrayProps);
@@ -231,17 +231,23 @@ function TestForm() {
               const { anotherPhNumber } = values;
               return (
                 <div>
-                  {anotherPhNumber.map((singleData, index) => (
-                    <div>
-                      <Field type="number" name={`singleData[${index}]`} />
+                  {anotherPhNumber.map((singleData, index) => {
+                    console.log("myDoubt", singleData, anotherPhNumber);
+                    return (
+                      <div>
+                        <Field
+                          type="number"
+                          name={`anotherPhNumber[${index}]`}
+                        />
 
-                      <button onClick={() => push("")}>add</button>
+                        <button onClick={() => push("")}>add</button>
 
-                      {index > 0 && (
-                        <button onClick={() => remove(index)}>delete</button>
-                      )}
-                    </div>
-                  ))}
+                        {index > 0 && (
+                          <button onClick={() => remove(index)}>delete</button>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               );
             }}
