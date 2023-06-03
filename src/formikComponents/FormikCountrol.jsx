@@ -7,6 +7,8 @@ function FormikCountrol({ control }) {
     case "select":
     case "radio":
     case "date":
+    default:
+      return null;
   }
 
   return <div>FormikCountrol</div>;
