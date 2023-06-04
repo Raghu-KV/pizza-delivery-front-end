@@ -5,6 +5,7 @@ import FormikCountrol from "./FormikCountrol";
 function FormikContainer() {
   const initialValues = {
     email: "none",
+    comment: "",
   };
   const validationSchema = yup.object({
     email: yup.string().required("Email required"),
@@ -28,6 +29,14 @@ function FormikContainer() {
             className="form-control border border-black"
             label="Enter your email"
           />
+
+          <FormikCountrol
+            control="textarea"
+            name="comment"
+            className="form-control border border-black"
+            label="Enter your comment"
+          />
+
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
