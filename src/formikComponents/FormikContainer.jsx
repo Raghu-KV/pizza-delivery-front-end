@@ -6,13 +6,22 @@ function FormikContainer() {
   const initialValues = {
     email: "none",
     comment: "",
+    village: "",
   };
   const validationSchema = yup.object({
     email: yup.string().required("Email required"),
+    village: yup.string().required("Must select any village"),
   });
   const onSubmit = (values) => {
     console.log("form Container values", values);
   };
+
+  const villageOptions = [
+    { value: "", key: "--SELECT ANY VILLAGE--" },
+    { value: "chennimalai", key: "Chennimalai" },
+    { value: "erode", key: "Erode" },
+    { value: "preundurai", key: "Perundurai" },
+  ];
 
   return (
     <Formik
@@ -35,6 +44,13 @@ function FormikContainer() {
             name="comment"
             className="form-control border border-black"
             label="Enter your comment"
+          />
+          <FormikCountrol
+            control="select"
+            name="village"
+            lable="Select Village"
+            className="form-select border border-black"
+            villageOptions={villageOptions}
           />
 
           <button type="submit" className="btn btn-primary">
