@@ -8,11 +8,16 @@ function FormikContainer() {
     comment: "",
     village: "",
     mealOptionRadio: "",
+    foodItemsCheckbox: [],
   };
   const validationSchema = yup.object({
     email: yup.string().required("Email required"),
     village: yup.string().required("Must select any village"),
     mealOptionRadio: yup.string().required("select meal"),
+    foodItemsCheckbox: yup
+      .array()
+      .min(1, "must select")
+      .required("this is required"),
   });
   const onSubmit = (values) => {
     console.log("form Container values", values);
@@ -32,6 +37,12 @@ function FormikContainer() {
     { value: "duck", key: "duck" },
   ];
 
+  const foodItems = [
+    { value: "rice", key: "Rice" },
+    { value: "sambar", key: "Sambar" },
+    { value: "vegetables", key: "vegetables" },
+    { value: "rasam", key: "Rasam" },
+  ];
   return (
     <Formik
       initialValues={initialValues}
@@ -68,6 +79,14 @@ function FormikContainer() {
             label="Select any Meal Option"
             className="form-check-input"
             mealItems={mealItems}
+          />
+
+          <FormikCountrol
+            control="checkbox"
+            name="foodItemsCheckbox"
+            label="Select items you want"
+            className="form-check-input"
+            foodItems={foodItems}
           />
 
           <button type="submit" className="btn btn-primary">

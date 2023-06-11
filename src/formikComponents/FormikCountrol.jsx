@@ -3,6 +3,7 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 import SelectInput from "./SelectInput";
 import RadioInput from "./RadioInput";
+import CheckBoxInput from "./CheckBoxInput";
 
 function FormikCountrol({ control, ...rest }) {
   switch (control) {
@@ -14,6 +15,8 @@ function FormikCountrol({ control, ...rest }) {
       return <SelectInput {...rest} />;
     case "radio":
       return <RadioInput {...rest} />;
+    case "checkbox":
+      return <CheckBoxInput {...rest} />;
     case "date":
     default:
       return null;
