@@ -7,10 +7,12 @@ function FormikContainer() {
     email: "none",
     comment: "",
     village: "",
+    mealOptionRadio: "",
   };
   const validationSchema = yup.object({
     email: yup.string().required("Email required"),
     village: yup.string().required("Must select any village"),
+    mealOptionRadio: yup.string().required("select meal"),
   });
   const onSubmit = (values) => {
     console.log("form Container values", values);
@@ -21,6 +23,13 @@ function FormikContainer() {
     { value: "chennimalai", key: "Chennimalai" },
     { value: "erode", key: "Erode" },
     { value: "preundurai", key: "Perundurai" },
+  ];
+
+  const mealItems = [
+    { value: "fish", key: "Fish" },
+    { value: "chicken", key: "Chicken" },
+    { value: "mutton", key: "Mutton" },
+    { value: "duck", key: "duck" },
   ];
 
   return (
@@ -51,6 +60,14 @@ function FormikContainer() {
             lable="Select Village"
             className="form-select border border-black"
             villageOptions={villageOptions}
+          />
+
+          <FormikCountrol
+            control="radio"
+            name="mealOptionRadio"
+            label="Select any Meal Option"
+            className="form-check-input"
+            mealItems={mealItems}
           />
 
           <button type="submit" className="btn btn-primary">

@@ -2,6 +2,7 @@ import React from "react";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import SelectInput from "./SelectInput";
+import RadioInput from "./RadioInput";
 
 function FormikCountrol({ control, ...rest }) {
   switch (control) {
@@ -12,6 +13,7 @@ function FormikCountrol({ control, ...rest }) {
     case "select":
       return <SelectInput {...rest} />;
     case "radio":
+      return <RadioInput {...rest} />;
     case "date":
     default:
       return null;
