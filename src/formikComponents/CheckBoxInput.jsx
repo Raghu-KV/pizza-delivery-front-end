@@ -19,6 +19,7 @@ function CheckBoxInput({ label, name, foodItems, ...rest }) {
               />
               <label htmlFor={foodItem.value} className="form-check-label">
                 {foodItem.key}
+                <p>rs 50</p>
               </label>
             </div>
           ));
