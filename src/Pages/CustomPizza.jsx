@@ -3,8 +3,19 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { BACK_END_URL } from "../URL";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function CustomPizza() {
+  const customPizza = async () => {
+    const responce = await fetch(`${BACK_END_URL}/customPizza`);
+    const data = await responce.json();
+    console.log("custom-pizza Data", data);
+  };
+
+  useEffect(() => {
+    customPizza();
+  }, []);
+
   const [message, setMessage] = useState("");
   const formik = useFormik({
     initialValues: {
