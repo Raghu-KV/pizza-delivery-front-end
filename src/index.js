@@ -10,6 +10,7 @@ import productReducers from "./redux_reducers/product";
 import cartReducer from "./redux_reducers/cart";
 import ordersReducer from "./redux_reducers/orders";
 import allOrdersReducer from "./redux_reducers/allOrders";
+import customPizzaReducer from "./redux_reducers/customPizza";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     cart: cartReducer,
     allOrders: allOrdersReducer,
     orders: ordersReducer,
+    customPizza: customPizzaReducer,
   },
 });
 
