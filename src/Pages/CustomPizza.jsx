@@ -121,8 +121,9 @@ function CustomPizza() {
                   ));
                 }}
               </Field>
-              <ErrorMessage name="test" component={DeleteTextError} />
+              <ErrorMessage name="" component={DeleteTextError} />
             </div>
+
             <button
               type="submit"
               className="btn btn-primary"
