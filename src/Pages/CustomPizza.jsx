@@ -73,7 +73,7 @@ function CustomPizza() {
   };
 
   const validationSchema = yup.object({
-    pizzaBase: yup.string().required("this is test and it is required"),
+    pizzaBase: yup.string().required("pizza base is required"),
   });
 
   const onSubmit = (values) => {
@@ -121,7 +121,7 @@ function CustomPizza() {
                   ));
                 }}
               </Field>
-              <ErrorMessage name="" component={DeleteTextError} />
+              <ErrorMessage name="pizzaBase" component={DeleteTextError} />
             </div>
 
             <button
