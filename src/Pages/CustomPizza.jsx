@@ -70,14 +70,20 @@ function CustomPizza() {
 
   const initialValues = {
     pizzaBase: "",
+    pizzaSauce: "",
+    pizzaCheese: "",
+    veggies: [],
   };
 
   const validationSchema = yup.object({
     pizzaBase: yup.string().required("pizza base is required"),
+    pizzaSauce: yup.string().required("pizza sauce is required"),
+    pizzaCheese: yup.string().required("pizza cheese is required"),
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = (values, action) => {
     console.log(values);
+    action.resetForm();
   };
 
   return (
@@ -124,6 +130,103 @@ function CustomPizza() {
               <ErrorMessage name="pizzaBase" component={DeleteTextError} />
             </div>
 
+            <div className="mb-3">
+              <label className="form-label d-block">Select Pizza Sauce</label>
+              <Field name="pizzaSauce">
+                {(props) => {
+                  const { field } = props;
+                  return allPizzaSauces.map((singlePizzaSauce) => (
+                    <div
+                      className="form-check form-check-inline"
+                      key={singlePizzaSauce.pizzaSauce}
+                    >
+                      <input
+                        type="radio"
+                        {...field}
+                        value={singlePizzaSauce.pizzaSauce}
+                        checked={field.value === singlePizzaSauce.pizzaSauce}
+                        className="form-check-input"
+                        id={singlePizzaSauce.pizzaSauce}
+                      />
+
+                      <label
+                        htmlFor={singlePizzaSauce.pizzaSauce}
+                        className="form-check-label"
+                      >
+                        {singlePizzaSauce.pizzaSauce} Rs.
+                        {singlePizzaSauce.price}
+                      </label>
+                    </div>
+                  ));
+                }}
+              </Field>
+              <ErrorMessage name="pizzaSauce" component={DeleteTextError} />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label d-block">Select Pizza Cheese</label>
+              <Field name="pizzaCheese">
+                {(props) => {
+                  const { field } = props;
+                  return allPizzaCheese.map((singlePizzaCheese) => (
+                    <div
+                      className="form-check form-check-inline"
+                      key={singlePizzaCheese.pizzaCheese}
+                    >
+                      <input
+                        type="radio"
+                        {...field}
+                        value={singlePizzaCheese.pizzaCheese}
+                        checked={field.value === singlePizzaCheese.pizzaCheese}
+                        className="form-check-input"
+                        id={singlePizzaCheese.pizzaCheese}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor={singlePizzaCheese.pizzaCheese}
+                      >
+                        {singlePizzaCheese.pizzaCheese} Rs.
+                        {singlePizzaCheese.price}
+                      </label>
+                    </div>
+                  ));
+                }}
+              </Field>
+              <ErrorMessage name="pizzaCheese" component={DeleteTextError} />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label d-block">Select pizza Veggies</label>
+              <Field name="veggies">
+                {(props) => {
+                  const { field } = props;
+                  return allVeggies.map((singleVeggies) => (
+                    <div
+                      className="form-check form-check-inline"
+                      key={singleVeggies.veggies}
+                    >
+                      <input
+                        type="checkbox"
+                        {...field}
+                        value={singleVeggies.veggies}
+                        checked={field.value.includes(singleVeggies.veggies)}
+                        id={singleVeggies.veggies}
+                        className="form-check-input"
+                      />
+                      <label
+                        htmlFor={singleVeggies.veggies}
+                        className="form-check-label"
+                      >
+                        {singleVeggies.veggies}
+                        {field.value.length < 2
+                          ? "Free"
+                          : `Rs.${singleVeggies.price}`}
+                      </label>
+                    </div>
+                  ));
+                }}
+              </Field>
+            </div>
             <button
               type="submit"
               className="btn btn-primary"
