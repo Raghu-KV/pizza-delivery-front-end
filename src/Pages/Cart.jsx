@@ -8,6 +8,7 @@ import { BACK_END_URL } from "../URL";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.value);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,6 +24,42 @@ function Cart() {
     (singleCartItem) => singleCartItem.price * singleCartItem.quantity
   );
   console.log(cart, totalProductPrice);
+
+  //CUSTOM PIZZA OPRATIONS___________________________________
+  const customPizzaData = useSelector((state) => state.customPizza.value);
+  console.log(customPizzaData);
+  const [
+    allPizzaBasesObj,
+    allPizzaSaucesObj,
+    allPizzaCheeseObj,
+    allVeggiesObj,
+    allMeatObj,
+  ] = customPizzaData;
+
+  const { allPizzaBases } = allPizzaBasesObj;
+
+  const { allPizzaSauces } = allPizzaSaucesObj;
+
+  const { allPizzaCheese } = allPizzaCheeseObj;
+
+  const { allVeggies } = allVeggiesObj;
+
+  const { allMeat } = allMeatObj;
+
+  console.log(
+    "this is the one",
+    allPizzaBases,
+    "all pizza base",
+    allPizzaSauces,
+    "all pizza sauce",
+    allPizzaCheese,
+    "all pizza cheze",
+    allVeggies,
+    "all veggies",
+    allMeat,
+    "all meat"
+  );
+  //_________________________________________________________
 
   // total price for cart items --------------
   let price = 0;
