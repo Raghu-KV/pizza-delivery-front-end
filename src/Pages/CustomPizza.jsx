@@ -90,6 +90,7 @@ function CustomPizza() {
   const onSubmit = (values, action) => {
     const addedCustomPizza = { ...values, isCustomPizza: true };
     console.log(addedCustomPizza);
+
     //action.resetForm();
   };
 

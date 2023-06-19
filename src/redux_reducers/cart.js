@@ -18,6 +18,9 @@ const cartSilce = createSlice({
         }
       });
     },
+    addCustomPizzaToCart: (state, action) => {
+      state.value.push(action.payload);
+    },
   },
 });
 

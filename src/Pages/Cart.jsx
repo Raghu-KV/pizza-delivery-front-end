@@ -46,18 +46,8 @@ function Cart() {
 
   const { allMeat } = allMeatObj;
 
-  console.log(
-    "this is the one",
-    allPizzaBases,
-    "all pizza base",
-    allPizzaSauces,
-    "all pizza sauce",
-    allPizzaCheese,
-    "all pizza cheze",
-    allVeggies,
-    "all veggies",
-    allMeat,
-    "all meat"
+  const allCustomPizzaInCart = cart.filter(
+    (cartItem) => cartItem.isCustomPizza
   );
   //_________________________________________________________
 
