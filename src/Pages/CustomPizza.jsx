@@ -35,10 +35,10 @@ function CustomPizza() {
     if (customPizzaData.length !== 0) {
       const [
         allPizzaBasesObj,
-        allVeggiesObj,
-        allPizzaCheeseObj,
-        allMeatObj,
         allPizzaSaucesObj,
+        allPizzaCheeseObj,
+        allVeggiesObj,
+        allMeatObj,
       ] = customPizzaData;
 
       const { allPizzaBases } = allPizzaBasesObj;
