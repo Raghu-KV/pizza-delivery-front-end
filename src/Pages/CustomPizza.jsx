@@ -73,17 +73,24 @@ function CustomPizza() {
     pizzaSauce: "",
     pizzaCheese: "",
     veggies: [],
+    meat: [],
   };
 
   const validationSchema = yup.object({
     pizzaBase: yup.string().required("pizza base is required"),
     pizzaSauce: yup.string().required("pizza sauce is required"),
     pizzaCheese: yup.string().required("pizza cheese is required"),
+    veggies: yup
+      .array()
+      .min(1, "any one veggies should be selected")
+      .required("veggies is required"),
+    meat: yup.array(),
   });
 
   const onSubmit = (values, action) => {
-    console.log(values);
-    action.resetForm();
+    const addedCustomPizza = { ...values, isCustomPizza: true };
+    console.log(addedCustomPizza);
+    //action.resetForm();
   };
 
   return (
@@ -196,7 +203,9 @@ function CustomPizza() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label d-block">Select pizza Veggies</label>
+              <label className="form-label d-block">
+                Select pizza Veggies Free up to 2 veggies
+              </label>
               <Field name="veggies">
                 {(props) => {
                   const { field } = props;
@@ -218,14 +227,46 @@ function CustomPizza() {
                         className="form-check-label"
                       >
                         {singleVeggies.veggies}
-                        {field.value.length < 2
-                          ? "Free"
-                          : `Rs.${singleVeggies.price}`}
+                        Rs.{singleVeggies.price}
                       </label>
                     </div>
                   ));
                 }}
               </Field>
+              <ErrorMessage name="veggies" component={DeleteTextError} />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label d-block">
+                Select Meat Free up to 1 meat
+              </label>
+              <Field name="meat">
+                {(props) => {
+                  const { field } = props;
+                  return allMeat.map((singleMeat) => (
+                    <div
+                      className="form-check form-check-inline"
+                      key={singleMeat.meat}
+                    >
+                      <input
+                        type="checkbox"
+                        {...field}
+                        value={singleMeat.meat}
+                        checked={field.value.includes(singleMeat.meat)}
+                        id={singleMeat.meat}
+                        className="form-check-input"
+                      />
+                      <label
+                        htmlFor={singleMeat.meat}
+                        className="form-check-label"
+                      >
+                        {singleMeat.meat} Rs. {singleMeat.price}
+                      </label>
+                    </div>
+                  ));
+                }}
+              </Field>
+              <ErrorMessage name="meat" component={DeleteTextError} />
             </div>
             <button
               type="submit"
