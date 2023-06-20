@@ -24,7 +24,11 @@ const cartSilce = createSlice({
   },
 });
 
-export const { addToCart, deleteItemFromCart, changeQuantity } =
-  cartSilce.actions;
+export const {
+  addToCart,
+  deleteItemFromCart,
+  changeQuantity,
+  addCustomPizzaToCart,
+} = cartSilce.actions;
 
 export default cartSilce.reducer;

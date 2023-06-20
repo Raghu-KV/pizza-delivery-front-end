@@ -3,13 +3,14 @@ import * as yup from "yup";
 import { BACK_END_URL } from "../URL";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addCustomPizzaData } from "../redux_reducers/customPizza";
 import { useSelector } from "react-redux";
 import DeleteTextError from "../components/DeleteTextError";
 import { useState } from "react";
-
+import { addCustomPizzaToCart } from "../redux_reducers/cart";
+import { useNavigate } from "react-router-dom";
 function CustomPizza() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //const [customPizzaData, setCustomPizzaData] = useState([]);
 
   // const customPizza = async () => {
@@ -92,7 +93,17 @@ function CustomPizza() {
     const addedCustomPizza = { ...values, isCustomPizza: true };
     console.log(addedCustomPizza);
 
+    //setting this data to local storage
+    const getItemFromLocalStr = localStorage.getItem("cart");
+    const convertLocalStr = JSON.parse(getItemFromLocalStr);
+    const addCustomPizzaDataToLocalStr = [...convertLocalStr, addedCustomPizza];
+    const readyForLocalStr = JSON.stringify(addCustomPizzaDataToLocalStr);
+    localStorage.setItem("cart", readyForLocalStr);
+    console.log(addCustomPizzaDataToLocalStr);
+
+    //dispatch(addCustomPizzaToCart(addedCustomPizza));
     //action.resetForm();
+    //navigate("/cart");
   };
 
   return (

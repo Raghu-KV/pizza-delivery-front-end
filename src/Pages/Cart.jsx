@@ -20,7 +20,9 @@ function Cart() {
     dispatch(addToCart(newCartItems));
   }, []);
 
-  const totalProductPrice = cart.map(
+  const allReadyMadePizza = cart.filter((cartItem) => !cartItem.isCustomPizza);
+
+  const totalProductPrice = allReadyMadePizza.map(
     (singleCartItem) => singleCartItem.price * singleCartItem.quantity
   );
   console.log(cart, totalProductPrice);
@@ -46,6 +48,7 @@ function Cart() {
 
   const { allMeat } = allMeatObj;
 
+  console.log(cart);
   const allCustomPizzaInCart = cart.filter(
     (cartItem) => cartItem.isCustomPizza
   );
