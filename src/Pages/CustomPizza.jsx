@@ -103,7 +103,7 @@ function CustomPizza() {
 
     //dispatch(addCustomPizzaToCart(addedCustomPizza));
     //action.resetForm();
-    //navigate("/cart");
+    navigate("/cart");
   };
 
   return (

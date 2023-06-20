@@ -53,7 +53,62 @@ function Cart() {
     (cartItem) => cartItem.isCustomPizza
   );
 
-  console.log(allCustomPizzaInCart);
+  const customPizzaPrice = [];
+
+  allCustomPizzaInCart.map((singleCustomPizzaInCart) => {
+    //finding the pizza base-------------
+    allPizzaBases.filter((singlePizzaBase) => {
+      if (singlePizzaBase.pizzaBase === singleCustomPizzaInCart.pizzaBase) {
+        customPizzaPrice.push(singlePizzaBase);
+      }
+    });
+    //---------------------------------
+    //finding the pizza sauce-----------
+    allPizzaSauces.filter((singlePizzaSauce) => {
+      if (singlePizzaSauce.pizzaSauce === singleCustomPizzaInCart.pizzaSauce) {
+        customPizzaPrice.push(singlePizzaSauce);
+      }
+    });
+    //---------------------------------
+
+    //finding the pizza cheese-----------
+    allPizzaCheese.filter((singlePizzaCheese) => {
+      if (
+        singlePizzaCheese.pizzaCheese === singleCustomPizzaInCart.pizzaCheese
+      ) {
+        customPizzaPrice.push(singlePizzaCheese);
+      }
+    });
+    //---------------------------------
+    //finding the veggies price---------------
+    // allVeggies.map((singlePizzaVeggies) => {
+    //   if (singleCustomPizzaInCart.veggies.length > 0) {
+    //     singleCustomPizzaInCart.veggies.map((singleVeggies) => {
+    //       // for (let i = 0; i < singleCustomPizzaInCart.veggies.length; i++) {
+    //       if (singleVeggies === singlePizzaVeggies.veggies) {
+    //         customPizzaPrice.push(singlePizzaVeggies);
+    //       }
+    //     });
+    //   }
+    // });
+
+    for (let i = 0; i < allVeggies.length; i++) {}
+    //----------------------------------------
+
+    //finding the meat price---------------
+    allMeat.map((singlePizzaMeat) => {
+      if (singleCustomPizzaInCart.meat.length > 1) {
+        singleCustomPizzaInCart.meat.map((singleMeat) => {
+          if (singleMeat === singlePizzaMeat.meat) {
+            customPizzaPrice.push(singlePizzaMeat);
+          }
+        });
+      }
+    });
+    //----------------------------------------
+  });
+
+  console.log(allCustomPizzaInCart, customPizzaPrice);
   //_________________________________________________________
 
   // total price for cart items --------------
