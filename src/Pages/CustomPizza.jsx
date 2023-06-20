@@ -4,26 +4,27 @@ import { BACK_END_URL } from "../URL";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addCustomPizzaData } from "../redux_reducers/customPizza";
+import { useSelector } from "react-redux";
 import DeleteTextError from "../components/DeleteTextError";
 import { useState } from "react";
 
 function CustomPizza() {
   const dispatch = useDispatch();
-  const [customPizzaData, setCustomPizzaData] = useState([]);
+  //const [customPizzaData, setCustomPizzaData] = useState([]);
 
-  const customPizza = async () => {
-    const responce = await fetch(`${BACK_END_URL}/customPizza`);
-    const data = await responce.json();
-    console.log(data);
-    setCustomPizzaData(data);
-    dispatch(addCustomPizzaData(data));
-  };
+  // const customPizza = async () => {
+  //   const responce = await fetch(`${BACK_END_URL}/customPizza`);
+  //   const data = await responce.json();
+  //   console.log(data);
+  //   setCustomPizzaData(data);
+  //   dispatch(addCustomPizzaData(data));
+  // };
 
-  useEffect(() => {
-    customPizza();
-  }, []);
+  // useEffect(() => {
+  //   customPizza();
+  // }, []);
 
-  //const customPizzaData = useSelector((state) => state.customPizza.value);
+  const customPizzaData = useSelector((state) => state.customPizza.value);
 
   const [allPizzaBases, setAllPizzaBases] = useState([]);
   const [allPizzaSauces, setAllPizzaSauces] = useState([]);

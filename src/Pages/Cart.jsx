@@ -49,6 +49,8 @@ function Cart() {
   const allCustomPizzaInCart = cart.filter(
     (cartItem) => cartItem.isCustomPizza
   );
+
+  console.log(allCustomPizzaInCart);
   //_________________________________________________________
 
   // total price for cart items --------------
