@@ -125,10 +125,16 @@ function Cart() {
   });
 
   console.log(allCustomPizzaInCart, customPizzaPrice);
+  let customPizzaRs = 0;
+  customPizzaPrice.map((singleCustomPizzaPrice) => {
+    customPizzaRs += singleCustomPizzaPrice.price;
+  });
+  console.log(customPizzaRs);
   //_________________________________________________________
 
   // total price for cart items --------------
   let price = 0;
+  price += customPizzaRs;
   for (let i = 0; i < totalProductPrice.length; i++) {
     price += totalProductPrice[i];
   }
