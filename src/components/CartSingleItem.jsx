@@ -52,9 +52,10 @@ function CartSingleItem({ singleCart }) {
     // console.log("after map :", changedQty.quantity);
     // console.log("after map :", parsedlocalStoredCart);
   }, [quantity]);
-  if (!singleCart.isCustomPizza) {
-    return (
-      <div className="col-12 col-md-6 col-lg-6 col-xxl-4">
+
+  return (
+    <div className="col-12 col-md-6 col-lg-6 col-xxl-4">
+      {!singleCart.isCustomPizza ? (
         <div className="card mx-auto" style={{ width: "15rem" }}>
           <img src={singleCart.image} className="card-img-top" alt="..." />
           <div className="card-body ">
@@ -90,9 +91,45 @@ function CartSingleItem({ singleCart }) {
             ></i>
           </div>
         </div>
-      </div>
-    );
-  }
+      ) : (
+        <div className="card mx-auto" style={{ width: "15rem" }}>
+          <img
+            src={
+              "https://cdn.dribbble.com/users/311861/screenshots/2269929/custom_made.png"
+            }
+            className="card-img-top"
+            alt="..."
+          />
+          <div className="card-body ">
+            <p className="card-text fs-5 fw-semibold m-0">Custom Pizza</p>
+          </div>
+          <div className=" card-body p-0 px-3 mb-2">
+            <h4 className="text-center fs-5 fw-semibold">
+              {singleCart.pizzaBase}
+            </h4>
+            <h4 className="text-center fs-5 fw-semibold">
+              {singleCart.pizzaSauce}
+            </h4>
+            <h4 className="text-center fs-5 fw-semibold">
+              {singleCart.pizzaCheese}
+            </h4>{" "}
+            {/* <h4 className="text-center fs-5 fw-semibold">
+              {singleCart.pizzaBase}
+            </h4>{" "}
+            <h4 className="text-center fs-5 fw-semibold">
+              {singleCart.pizzaBase}
+            </h4> */}
+            <i
+              className="fa fa-trash text-danger"
+              aria-hidden="true"
+              style={{ cursor: "pointer" }}
+              onClick={deleteTheItem}
+            ></i>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default CartSingleItem;
