@@ -91,20 +91,36 @@ function Cart() {
     //     });
     //   }
     // });
-
-    for (let i = 0; i < allVeggies.length; i++) {}
+    if (singleCustomPizzaInCart.veggies.length > 2) {
+      for (let i = 0; i < allVeggies.length; i++) {
+        for (let j = 2; j < singleCustomPizzaInCart.veggies.length; j++) {
+          if (singleCustomPizzaInCart.veggies[j] === allVeggies[i].veggies) {
+            customPizzaPrice.push(allVeggies[i]);
+          }
+        }
+      }
+    }
     //----------------------------------------
 
     //finding the meat price---------------
-    allMeat.map((singlePizzaMeat) => {
-      if (singleCustomPizzaInCart.meat.length > 1) {
-        singleCustomPizzaInCart.meat.map((singleMeat) => {
-          if (singleMeat === singlePizzaMeat.meat) {
-            customPizzaPrice.push(singlePizzaMeat);
+    // allMeat.map((singlePizzaMeat) => {
+    //   if (singleCustomPizzaInCart.meat.length > 1) {
+    //     singleCustomPizzaInCart.meat.map((singleMeat) => {
+    //       if (singleMeat === singlePizzaMeat.meat) {
+    //         customPizzaPrice.push(singlePizzaMeat);
+    //       }
+    //     });
+    //   }
+    // });
+    if (singleCustomPizzaInCart.meat.length > 1) {
+      for (let i = 0; i < allMeat.length; i++) {
+        for (let j = 1; j < singleCustomPizzaInCart.meat.length; j++) {
+          if (singleCustomPizzaInCart.meat[j] === allMeat[i].meat) {
+            customPizzaPrice.push(allMeat[i]);
           }
-        });
+        }
       }
-    });
+    }
     //----------------------------------------
   });
 
