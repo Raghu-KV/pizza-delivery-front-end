@@ -8,6 +8,7 @@ import DeleteTextError from "../components/DeleteTextError";
 import { useState } from "react";
 import { addCustomPizzaToCart } from "../redux_reducers/cart";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 function CustomPizza() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -90,7 +91,11 @@ function CustomPizza() {
   });
 
   const onSubmit = (values, action) => {
-    const addedCustomPizza = { ...values, isCustomPizza: true };
+    const addedCustomPizza = {
+      ...values,
+      isCustomPizza: true,
+      customId: uuidv4(),
+    };
     console.log(addedCustomPizza);
 
     //setting this data to local storage
