@@ -3,7 +3,7 @@ import { deleteItemFromCart } from "../redux_reducers/cart";
 import { changeQuantity } from "../redux_reducers/cart";
 import { useState, useEffect } from "react";
 
-function CartSingleItem({ singleCart }) {
+function CartSingleItem({ singleCart, customPizzaPrice }) {
   const dispatch = useDispatch();
 
   const [quantity, setQuantity] = useState(singleCart.quantity);
@@ -43,7 +43,7 @@ function CartSingleItem({ singleCart }) {
 
     //console.log("before Map :", parsedlocalStoredCart);
     parsedlocalStoredCart.map((data) => {
-      if (data._id === changedQty._id) {
+      if (data._id === changedQty._id && !data.isCustomPizza) {
         data.quantity = changedQty.quantity;
       }
     });
@@ -103,22 +103,49 @@ function CartSingleItem({ singleCart }) {
           <div className="card-body ">
             <p className="card-text fs-5 fw-semibold m-0">Custom Pizza</p>
           </div>
-          <div className=" card-body p-0 px-3 mb-2">
-            <h4 className="text-center fs-5 fw-semibold">
-              {singleCart.pizzaBase}
-            </h4>
-            <h4 className="text-center fs-5 fw-semibold">
-              {singleCart.pizzaSauce}
-            </h4>
-            <h4 className="text-center fs-5 fw-semibold">
-              {singleCart.pizzaCheese}
-            </h4>{" "}
-            {/* <h4 className="text-center fs-5 fw-semibold">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Accordion Item #1
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p className="text-center fs-5 fw-semibold">
+                    {singleCart.pizzaBase}
+                  </p>
+                  <p className="text-center fs-5 fw-semibold">
+                    {singleCart.pizzaSauce}
+                  </p>
+                  <p className="text-center fs-5 fw-semibold">
+                    {singleCart.pizzaCheese}
+                  </p>{" "}
+                  {/* <h4 className="text-center fs-5 fw-semibold">
               {singleCart.pizzaBase}
             </h4>{" "}
             <h4 className="text-center fs-5 fw-semibold">
               {singleCart.pizzaBase}
             </h4> */}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className=" card-body p-0 px-3 mb-2 d-flex justify-content-between">
+            <h4 className="text-center fs-5 fw-semibold">
+              Price : Rs.pending..
+            </h4>
             <i
               className="fa fa-trash text-danger"
               aria-hidden="true"

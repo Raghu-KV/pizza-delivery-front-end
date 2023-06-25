@@ -202,7 +202,11 @@ function Cart() {
         <div className="col-sm-12 col-md-12 col-lg-8">
           <div className="row g-4">
             {cart.map((singleCart) => (
-              <CartSingleItem singleCart={singleCart} key={singleCart._id} />
+              <CartSingleItem
+                singleCart={singleCart}
+                key={singleCart._id}
+                customPizzaPrice={customPizzaPrice}
+              />
             ))}
           </div>
         </div>
