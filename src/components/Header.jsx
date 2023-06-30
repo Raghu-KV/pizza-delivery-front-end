@@ -110,9 +110,12 @@ function Header() {
                     </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
+                    <Link
+                      className="dropdown-item"
+                      to={"admin/customPizzaOperations"}
+                    >
+                      Coustom pizza operations
+                    </Link>
                   </li>
                 </ul>
               </li>
