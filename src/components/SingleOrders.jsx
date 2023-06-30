@@ -20,11 +20,21 @@ function SingleOrders({ order }) {
           <h5 className="card-title text-pirmary">Your order items</h5>
         </div>
         <ul className="list-group list-group-flush">
-          {order.orders.map((singleOrder) => (
-            <li className="list-group-item" key={singleOrder._id}>
-              {singleOrder.name} qty : {singleOrder.quantity}
-            </li>
-          ))}
+          {order.orders.map((singleOrder) => {
+            if (singleOrder.isCustomPizza) {
+              return (
+                <li className="list-group-item" key={singleOrder._id}>
+                  Custom Pizza qty : 1
+                </li>
+              );
+            } else {
+              return (
+                <li className="list-group-item" key={singleOrder._id}>
+                  {singleOrder.name} qty : {singleOrder.quantity}
+                </li>
+              );
+            }
+          })}
         </ul>
       </div>
     </div>
