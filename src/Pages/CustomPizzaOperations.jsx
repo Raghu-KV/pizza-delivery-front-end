@@ -4,6 +4,10 @@ import { BACK_END_URL } from "../URL";
 import { useDispatch } from "react-redux";
 import { addCustomPizzaData } from "../redux_reducers/customPizza";
 
+import TabelRowPizzaBase from "../components/TabelRowPizzaBase";
+import TabelRowPizzaSauce from "../components/TabelRowPizzaSauce";
+import TabelRowPizzaCheese from "../components/TableRowPizzaCheese";
+
 function CustomPizzaOperations() {
   const customPizzaData = useSelector((state) => state.customPizza.value);
 
@@ -56,7 +60,29 @@ function CustomPizzaOperations() {
       headers: { "Content-Type": "application/json", "x-auth-token": token },
       body: JSON.stringify(pizzaBaseName),
     });
-    customPizza();
+    await customPizza();
+  };
+
+  const deletePizzaSauce = async (data) => {
+    const pizzaSauceName = { pizzaSauceName: data };
+    console.log(pizzaSauceName);
+    const responce = await fetch(`${BACK_END_URL}/deleteCustomSauce`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
+      body: JSON.stringify(pizzaSauceName),
+    });
+    await customPizza();
+  };
+
+  const deletePizzaCheese = async (data) => {
+    const pizzaCheeseName = { pizzaCheeseName: data };
+    console.log(pizzaCheeseName);
+    const responce = await fetch(`${BACK_END_URL}/deleteCustomCheese`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
+      body: JSON.stringify(pizzaCheeseName),
+    });
+    await customPizza();
   };
 
   return (
@@ -82,35 +108,13 @@ function CustomPizzaOperations() {
             </th>
           </thead>
           <tbody>
-            {allPizzaBases.map((singlePizzaBase) => {
-              return (
-                <tr>
-                  <td>{singlePizzaBase.pizzaBase}</td>
-                  <td>{singlePizzaBase.price}</td>
-                  <td>{singlePizzaBase.countInStock}</td>
-                  <td>
-                    {" "}
-                    <button className="btn">
-                      <i
-                        className="fas fa-thin fa-pen-to-square cursor-pointer"
-                        style={{ color: "#4046f2" }}
-                      ></i>
-                    </button>
-                  </td>
-                  <td>
-                    <button className="btn">
-                      <i
-                        className="fas fa-light fa-trash cursor-pointer"
-                        style={{ color: "#ab1c2a" }}
-                        onClick={() =>
-                          deletePizzaBase(singlePizzaBase.pizzaBase)
-                        }
-                      ></i>
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {allPizzaBases.map((singlePizzaBase) => (
+              <TabelRowPizzaBase
+                data={singlePizzaBase}
+                deleteFunction={deletePizzaBase}
+                key={singlePizzaBase.pizzaBase}
+              />
+            ))}
           </tbody>
         </table>
         <button className="btn btn-primary" type="button">
@@ -141,24 +145,11 @@ function CustomPizzaOperations() {
           </thead>
           <tbody>
             {allPizzaSauces.map((data) => (
-              <tr>
-                <td>{data.pizzaSauce}</td>
-                <td>{data.price}</td>
-                <td>{data.countInStock}</td>
-                <td>
-                  {" "}
-                  <i
-                    className="fas fa-thin fa-pen-to-square"
-                    style={{ color: "#4046f2" }}
-                  ></i>
-                </td>
-                <td>
-                  <i
-                    className="fas fa-light fa-trash"
-                    style={{ color: "#ab1c2a" }}
-                  ></i>
-                </td>
-              </tr>
+              <TabelRowPizzaSauce
+                data={data}
+                deleteFunction={deletePizzaSauce}
+                key={data.pizzaSauce}
+              />
             ))}
           </tbody>
         </table>
@@ -190,24 +181,11 @@ function CustomPizzaOperations() {
           </thead>
           <tbody>
             {allPizzaCheese.map((data) => (
-              <tr>
-                <td>{data.pizzaCheese}</td>
-                <td>{data.price}</td>
-                <td>{data.countInStock}</td>
-                <td>
-                  {" "}
-                  <i
-                    className="fas fa-thin fa-pen-to-square"
-                    style={{ color: "#4046f2" }}
-                  ></i>
-                </td>
-                <td>
-                  <i
-                    className="fas fa-light fa-trash"
-                    style={{ color: "#ab1c2a" }}
-                  ></i>
-                </td>
-              </tr>
+              <TabelRowPizzaCheese
+                data={data}
+                deleteFunction={deletePizzaCheese}
+                key={data.pizzaCheese}
+              />
             ))}
           </tbody>
         </table>
