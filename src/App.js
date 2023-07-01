@@ -21,6 +21,7 @@ import CustomPizza from "./Pages/CustomPizza";
 import TestForm from "./Pages/TestForm";
 import AnotherTestForm from "./Pages/AnotherTestForm";
 import CustomPizzaOperations from "./Pages/CustomPizzaOperations";
+import AddPizzaBase from "./Pages/AddPizzaBase";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route path="/customPizza" element={<CustomPizza />} />
             <Route path="/testForm" element={<TestForm />} />
             <Route path="/testForm2" element={<AnotherTestForm />} />
+            <Route path="/add/pizzaBase" element={<AddPizzaBase />} />
           </Routes>
         </div>
       </main>

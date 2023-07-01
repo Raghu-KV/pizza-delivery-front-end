@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function TabelRowPizzaBase({ data, deleteFunction }) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <tr>
       <td>{data.pizzaBase}</td>
@@ -12,6 +15,7 @@ function TabelRowPizzaBase({ data, deleteFunction }) {
           <i
             className="fas fa-thin fa-pen-to-square cursor-pointer"
             style={{ color: "#4046f2" }}
+            onClick={() => navigate("/add/pizzaBase")}
           ></i>
         </button>
       </td>

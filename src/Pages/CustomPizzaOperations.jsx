@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { BACK_END_URL } from "../URL";
 import { useDispatch } from "react-redux";
 import { addCustomPizzaData } from "../redux_reducers/customPizza";
-
+import { useNavigate } from "react-router-dom";
 import TabelRowPizzaBase from "../components/TabelRowPizzaBase";
 import TabelRowPizzaSauce from "../components/TabelRowPizzaSauce";
 import TabelRowPizzaCheese from "../components/TableRowPizzaCheese";
@@ -109,6 +109,8 @@ function CustomPizzaOperations() {
     await customPizza();
   };
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="table-responsive">
@@ -141,7 +143,11 @@ function CustomPizzaOperations() {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-primary" type="button">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate("/add/pizzaBase")}
+        >
           <i className="fas fa-solid fa-plus me-2"></i>
           Add pizza base
         </button>
