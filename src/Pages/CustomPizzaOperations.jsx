@@ -1,5 +1,8 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { BACK_END_URL } from "../URL";
+import { useDispatch } from "react-redux";
+import { addCustomPizzaData } from "../redux_reducers/customPizza";
 
 function CustomPizzaOperations() {
   const customPizzaData = useSelector((state) => state.customPizza.value);
@@ -33,6 +36,29 @@ function CustomPizzaOperations() {
     }
   }, [customPizzaData]);
 
+  const dispatch = useDispatch();
+
+  const customPizza = async () => {
+    const responce = await fetch(`${BACK_END_URL}/customPizza`);
+    const data = await responce.json();
+    console.log(data);
+
+    dispatch(addCustomPizzaData(data));
+  };
+
+  const token = localStorage.getItem("token");
+
+  const deletePizzaBase = async (data) => {
+    const pizzaBaseName = { pizzaBaseName: data };
+    console.log(pizzaBaseName);
+    const responce = await fetch(`${BACK_END_URL}/deleteCustomBase`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
+      body: JSON.stringify(pizzaBaseName),
+    });
+    customPizza();
+  };
+
   return (
     <div>
       <div className="table-responsive">
@@ -56,26 +82,35 @@ function CustomPizzaOperations() {
             </th>
           </thead>
           <tbody>
-            {allPizzaBases.map((singlePizzaBase) => (
-              <tr>
-                <td>{singlePizzaBase.pizzaBase}</td>
-                <td>{singlePizzaBase.price}</td>
-                <td>{singlePizzaBase.countInStock}</td>
-                <td>
-                  {" "}
-                  <i
-                    className="fas fa-thin fa-pen-to-square"
-                    style={{ color: "#4046f2" }}
-                  ></i>
-                </td>
-                <td>
-                  <i
-                    className="fas fa-light fa-trash"
-                    style={{ color: "#ab1c2a" }}
-                  ></i>
-                </td>
-              </tr>
-            ))}
+            {allPizzaBases.map((singlePizzaBase) => {
+              return (
+                <tr>
+                  <td>{singlePizzaBase.pizzaBase}</td>
+                  <td>{singlePizzaBase.price}</td>
+                  <td>{singlePizzaBase.countInStock}</td>
+                  <td>
+                    {" "}
+                    <button className="btn">
+                      <i
+                        className="fas fa-thin fa-pen-to-square cursor-pointer"
+                        style={{ color: "#4046f2" }}
+                      ></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button className="btn">
+                      <i
+                        className="fas fa-light fa-trash cursor-pointer"
+                        style={{ color: "#ab1c2a" }}
+                        onClick={() =>
+                          deletePizzaBase(singlePizzaBase.pizzaBase)
+                        }
+                      ></i>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <button className="btn btn-primary" type="button">
