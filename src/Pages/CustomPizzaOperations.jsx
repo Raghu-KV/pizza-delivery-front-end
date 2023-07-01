@@ -269,7 +269,7 @@ function CustomPizzaOperations() {
           onClick={() => navigate("/add/pizzaVeggies")}
         >
           <i className="fas fa-solid fa-plus me-2"></i>
-          Add pizza cheese
+          Add pizza veggies
         </button>
       </div>
 
