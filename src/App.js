@@ -22,6 +22,10 @@ import TestForm from "./Pages/TestForm";
 import AnotherTestForm from "./Pages/AnotherTestForm";
 import CustomPizzaOperations from "./Pages/CustomPizzaOperations";
 import AddPizzaBase from "./Pages/AddPizzaBase";
+import AddPizzaSauce from "./Pages/AddPizzaSauce";
+import AddPizzaCheese from "./Pages/AddPizzaCheese";
+import AddPizzaVeggies from "./Pages/AddPizzaVeggies";
+import AddPizzaMeat from "./Pages/AddPizzaMeat";
 
 function App() {
   return (
@@ -52,6 +56,10 @@ function App() {
             <Route path="/testForm" element={<TestForm />} />
             <Route path="/testForm2" element={<AnotherTestForm />} />
             <Route path="/add/pizzaBase" element={<AddPizzaBase />} />
+            <Route path="/add/pizzaSauce" element={<AddPizzaSauce />} />
+            <Route path="/add/pizzaCheese" element={<AddPizzaCheese />} />
+            <Route path="/add/pizzaVeggies" element={<AddPizzaVeggies />} />
+            <Route path="/add/pizzaMeat" element={<AddPizzaMeat />} />
           </Routes>
         </div>
       </main>

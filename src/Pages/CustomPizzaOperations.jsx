@@ -183,7 +183,11 @@ function CustomPizzaOperations() {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-primary" type="button">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate("/add/pizzaSauce")}
+        >
           <i className="fas fa-solid fa-plus me-2"></i>
           Add pizza sauce
         </button>
@@ -219,7 +223,11 @@ function CustomPizzaOperations() {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-primary" type="button">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate("/add/pizzaCheese")}
+        >
           <i className="fas fa-solid fa-plus me-2"></i>
           Add pizza cheese
         </button>
@@ -255,7 +263,11 @@ function CustomPizzaOperations() {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-primary" type="button">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate("/add/pizzaVeggies")}
+        >
           <i className="fas fa-solid fa-plus me-2"></i>
           Add pizza cheese
         </button>
@@ -291,9 +303,13 @@ function CustomPizzaOperations() {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-primary" type="button">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate("/add/pizzaMeat")}
+        >
           <i className="fas fa-solid fa-plus me-2"></i>
-          Add pizza cheese
+          Add pizza meat
         </button>
       </div>
     </div>
