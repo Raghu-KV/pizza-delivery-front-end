@@ -7,6 +7,8 @@ import { addCustomPizzaData } from "../redux_reducers/customPizza";
 import TabelRowPizzaBase from "../components/TabelRowPizzaBase";
 import TabelRowPizzaSauce from "../components/TabelRowPizzaSauce";
 import TabelRowPizzaCheese from "../components/TableRowPizzaCheese";
+import TabelRowPizzaVeggies from "../components/TableRowPizzaVeggies";
+import TabelRowPizzaMeat from "../components/TabelRowPizzaMeat";
 
 function CustomPizzaOperations() {
   const customPizzaData = useSelector((state) => state.customPizza.value);
@@ -81,6 +83,28 @@ function CustomPizzaOperations() {
       method: "DELETE",
       headers: { "Content-Type": "application/json", "x-auth-token": token },
       body: JSON.stringify(pizzaCheeseName),
+    });
+    await customPizza();
+  };
+
+  const deletePizzaVeggies = async (data) => {
+    const pizzaVeggiesName = { pizzaVeggiesName: data };
+    console.log(pizzaVeggiesName);
+    const responce = await fetch(`${BACK_END_URL}/deleteCustomVeggies`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
+      body: JSON.stringify(pizzaVeggiesName),
+    });
+    await customPizza();
+  };
+
+  const deletePizzaMeat = async (data) => {
+    const pizzaMeatName = { pizzaMeatName: data };
+    console.log(pizzaMeatName);
+    const responce = await fetch(`${BACK_END_URL}/deleteCustomMeat`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
+      body: JSON.stringify(pizzaMeatName),
     });
     await customPizza();
   };
@@ -217,24 +241,11 @@ function CustomPizzaOperations() {
           </thead>
           <tbody>
             {allVeggies.map((data) => (
-              <tr>
-                <td>{data.veggies}</td>
-                <td>{data.price}</td>
-                <td>{data.countInStock}</td>
-                <td>
-                  {" "}
-                  <i
-                    className="fas fa-thin fa-pen-to-square"
-                    style={{ color: "#4046f2" }}
-                  ></i>
-                </td>
-                <td>
-                  <i
-                    className="fas fa-light fa-trash"
-                    style={{ color: "#ab1c2a" }}
-                  ></i>
-                </td>
-              </tr>
+              <TabelRowPizzaVeggies
+                data={data}
+                deleteFunction={deletePizzaVeggies}
+                key={data.veggies}
+              />
             ))}
           </tbody>
         </table>
@@ -266,24 +277,11 @@ function CustomPizzaOperations() {
           </thead>
           <tbody>
             {allMeat.map((data) => (
-              <tr>
-                <td>{data.meat}</td>
-                <td>{data.price}</td>
-                <td>{data.countInStock}</td>
-                <td>
-                  {" "}
-                  <i
-                    className="fas fa-thin fa-pen-to-square"
-                    style={{ color: "#4046f2" }}
-                  ></i>
-                </td>
-                <td>
-                  <i
-                    className="fas fa-light fa-trash"
-                    style={{ color: "#ab1c2a" }}
-                  ></i>
-                </td>
-              </tr>
+              <TabelRowPizzaMeat
+                data={data}
+                deleteFunction={deletePizzaMeat}
+                key={data.meat}
+              />
             ))}
           </tbody>
         </table>
