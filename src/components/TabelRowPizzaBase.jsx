@@ -15,7 +15,7 @@ function TabelRowPizzaBase({ data, deleteFunction }) {
           <i
             className="fas fa-thin fa-pen-to-square cursor-pointer"
             style={{ color: "#4046f2" }}
-            onClick={() => navigate("/add/pizzaBase")}
+            onClick={() => navigate(`/edit/pizzaBase/${data.pizzaBase}`)}
           ></i>
         </button>
       </td>
