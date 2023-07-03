@@ -3,14 +3,22 @@ import * as yup from "yup";
 import DeleteTextError from "../components/DeleteTextError";
 import { BACK_END_URL } from "../URL";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function EditPizzaBase() {
   const { baseItem } = useParams();
-  console.log(baseItem);
+
+  const baseItemName = useSelector((state) => state.customPizza.value);
+  const pizzaBases = baseItemName[0];
+  const { allPizzaBases } = pizzaBases;
+  const correctItem = allPizzaBases.find((data) => data.pizzaBase === baseItem);
+
+  console.log(baseItem, allPizzaBases, correctItem);
+
   const initialValues = {
-    pizzaBase: "",
-    price: "",
-    countInStock: "",
+    pizzaBase: correctItem.pizzaBase,
+    price: correctItem.price,
+    countInStock: correctItem.countInStock,
   };
   const validationSchema = yup.object({
     pizzaBase: yup.string().required("Pizza Base is required"),
@@ -29,12 +37,13 @@ function EditPizzaBase() {
   const token = localStorage.getItem("token");
 
   const formSubmit = async (values) => {
-    const responce = await fetch(`${BACK_END_URL}/addCustomBase`, {
+    const responce = await fetch(`${BACK_END_URL}/editCustomBase/${baseItem}`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-auth-token": token },
       body: JSON.stringify(values),
     });
     navigate("/");
+    console.log(values);
   };
 
   return (
