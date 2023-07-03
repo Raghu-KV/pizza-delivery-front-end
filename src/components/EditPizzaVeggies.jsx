@@ -5,25 +5,23 @@ import { BACK_END_URL } from "../URL";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function EditPizzaCheese() {
-  const { cheeseItem } = useParams();
+function EditPizzaVeggies() {
+  const { veggiesItem } = useParams();
 
   const customItemName = useSelector((state) => state.customPizza.value);
-  const pizzaCheese = customItemName[2];
-  const { allPizzaCheese } = pizzaCheese;
-  const correctItem = allPizzaCheese.find(
-    (data) => data.pizzaCheese === cheeseItem
-  );
+  const pizzaVeggies = customItemName[3];
+  const { allVeggies } = pizzaVeggies;
+  const correctItem = allVeggies.find((data) => data.veggies === veggiesItem);
 
   //console.log(sauceItem, allPizzaSauces, correctItem);
 
   const initialValues = {
-    pizzaCheese: correctItem.pizzaCheese,
+    veggies: correctItem.veggies,
     price: correctItem.price,
     countInStock: correctItem.countInStock,
   };
   const validationSchema = yup.object({
-    pizzaCheese: yup.string().required("Pizza Sauce is required"),
+    veggies: yup.string().required("Pizza Sauce is required"),
     price: yup
       .number()
       .min(1, "cannot give negitive numbers")
@@ -40,7 +38,7 @@ function EditPizzaCheese() {
 
   const formSubmit = async (values) => {
     const responce = await fetch(
-      `${BACK_END_URL}/editCustomCheese/${cheeseItem}`,
+      `${BACK_END_URL}/editCustomVeggies/${veggiesItem}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
@@ -60,17 +58,17 @@ function EditPizzaCheese() {
       {(formik) => (
         <Form>
           <div className="mb-3">
-            <label htmlFor="pizzaCheese" className="form-label">
-              Enter pizza Cheese
+            <label htmlFor="veggies" className="form-label">
+              Enter pizza Veggies
             </label>
             <Field
               type="text"
               className="form-control border border-black"
-              id="pizzaCheese"
-              name="pizzaCheese"
+              id="veggies"
+              name="veggies"
             />
 
-            <ErrorMessage name="pizzaCheese" component={DeleteTextError} />
+            <ErrorMessage name="veggies" component={DeleteTextError} />
           </div>
 
           <div className="mb-3">
@@ -114,4 +112,4 @@ function EditPizzaCheese() {
   );
 }
 
-export default EditPizzaCheese;
+export default EditPizzaVeggies;

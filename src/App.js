@@ -29,6 +29,8 @@ import AddPizzaMeat from "./Pages/AddPizzaMeat";
 import EditPizzaBase from "./components/EditPizzaBase";
 import EditPizzaSauce from "./components/EditPizzaSauce";
 import EditPizzaCheese from "./components/EditPizzaCheese";
+import EditPizzaVeggies from "./components/EditPizzaVeggies";
+import EditPizzaMeat from "./components/EditPizzaMeat";
 
 function App() {
   return (
@@ -74,6 +76,15 @@ function App() {
             <Route
               path="/edit/pizzaCheese/:cheeseItem"
               element={<EditPizzaCheese />}
+            />
+            <Route
+              path="/edit/pizzaVeggies/:veggiesItem"
+              element={<EditPizzaVeggies />}
+            />
+
+            <Route
+              path="/edit/pizzaMeat/:meatItem"
+              element={<EditPizzaMeat />}
             />
           </Routes>
         </div>

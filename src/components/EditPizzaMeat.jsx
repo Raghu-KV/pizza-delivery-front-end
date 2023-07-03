@@ -5,25 +5,23 @@ import { BACK_END_URL } from "../URL";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function EditPizzaCheese() {
-  const { cheeseItem } = useParams();
+function EditPizzaMeat() {
+  const { meatItem } = useParams();
 
   const customItemName = useSelector((state) => state.customPizza.value);
-  const pizzaCheese = customItemName[2];
-  const { allPizzaCheese } = pizzaCheese;
-  const correctItem = allPizzaCheese.find(
-    (data) => data.pizzaCheese === cheeseItem
-  );
+  const pizzaMeat = customItemName[4];
+  const { allMeat } = pizzaMeat;
+  const correctItem = allMeat.find((data) => data.meat === meatItem);
 
   //console.log(sauceItem, allPizzaSauces, correctItem);
 
   const initialValues = {
-    pizzaCheese: correctItem.pizzaCheese,
+    meat: correctItem.meat,
     price: correctItem.price,
     countInStock: correctItem.countInStock,
   };
   const validationSchema = yup.object({
-    pizzaCheese: yup.string().required("Pizza Sauce is required"),
+    meat: yup.string().required("Pizza Sauce is required"),
     price: yup
       .number()
       .min(1, "cannot give negitive numbers")
@@ -39,14 +37,11 @@ function EditPizzaCheese() {
   const token = localStorage.getItem("token");
 
   const formSubmit = async (values) => {
-    const responce = await fetch(
-      `${BACK_END_URL}/editCustomCheese/${cheeseItem}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify(values),
-      }
-    );
+    const responce = await fetch(`${BACK_END_URL}/editCustomMeat/${meatItem}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
+      body: JSON.stringify(values),
+    });
     navigate("/");
     console.log(values);
   };
@@ -60,17 +55,17 @@ function EditPizzaCheese() {
       {(formik) => (
         <Form>
           <div className="mb-3">
-            <label htmlFor="pizzaCheese" className="form-label">
-              Enter pizza Cheese
+            <label htmlFor="meat" className="form-label">
+              Enter pizza Meat
             </label>
             <Field
               type="text"
               className="form-control border border-black"
-              id="pizzaCheese"
-              name="pizzaCheese"
+              id="meat"
+              name="meat"
             />
 
-            <ErrorMessage name="pizzaCheese" component={DeleteTextError} />
+            <ErrorMessage name="meat" component={DeleteTextError} />
           </div>
 
           <div className="mb-3">
@@ -114,4 +109,4 @@ function EditPizzaCheese() {
   );
 }
 
-export default EditPizzaCheese;
+export default EditPizzaMeat;
