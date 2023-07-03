@@ -5,23 +5,25 @@ import { BACK_END_URL } from "../URL";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function EditPizzaBase() {
-  const { baseItem } = useParams();
+function EditPizzaCheese() {
+  const { cheeseItem } = useParams();
 
-  const baseItemName = useSelector((state) => state.customPizza.value);
-  const pizzaBases = baseItemName[0];
-  const { allPizzaBases } = pizzaBases;
-  const correctItem = allPizzaBases.find((data) => data.pizzaBase === baseItem);
+  const customItemName = useSelector((state) => state.customPizza.value);
+  const pizzaCheese = customItemName[2];
+  const { allPizzaCheese } = pizzaCheese;
+  const correctItem = allPizzaCheese.find(
+    (data) => data.pizzaCheese === cheeseItem
+  );
 
-  console.log(baseItem, allPizzaBases, correctItem);
+  //console.log(sauceItem, allPizzaSauces, correctItem);
 
   const initialValues = {
-    pizzaBase: correctItem.pizzaBase,
+    pizzaCheese: correctItem.pizzaCheese,
     price: correctItem.price,
     countInStock: correctItem.countInStock,
   };
   const validationSchema = yup.object({
-    pizzaBase: yup.string().required("Pizza Base is required"),
+    pizzaCheese: yup.string().required("Pizza Sauce is required"),
     price: yup
       .number()
       .min(1, "cannot give negitive numbers")
@@ -37,11 +39,14 @@ function EditPizzaBase() {
   const token = localStorage.getItem("token");
 
   const formSubmit = async (values) => {
-    const responce = await fetch(`${BACK_END_URL}/editCustomBase/${baseItem}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-auth-token": token },
-      body: JSON.stringify(values),
-    });
+    const responce = await fetch(
+      `${BACK_END_URL}/editCustomCheese/${cheeseItem}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-auth-token": token },
+        body: JSON.stringify(values),
+      }
+    );
     navigate("/");
     console.log(values);
   };
@@ -55,17 +60,17 @@ function EditPizzaBase() {
       {(formik) => (
         <Form>
           <div className="mb-3">
-            <label htmlFor="pizzaBase" className="form-label">
-              Enter pizza base
+            <label htmlFor="pizzaSauce" className="form-label">
+              Enter pizza Sauce
             </label>
             <Field
               type="text"
               className="form-control border border-black"
-              id="pizzaBase"
-              name="pizzaBase"
+              id="pizzaSauce"
+              name="pizzaSauce"
             />
 
-            <ErrorMessage name="pizzaBase" component={DeleteTextError} />
+            <ErrorMessage name="pizzaSauce" component={DeleteTextError} />
           </div>
 
           <div className="mb-3">
@@ -109,4 +114,4 @@ function EditPizzaBase() {
   );
 }
 
-export default EditPizzaBase;
+export default EditPizzaCheese;

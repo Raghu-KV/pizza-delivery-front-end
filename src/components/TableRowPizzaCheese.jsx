@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function TabelRowPizzaCheese({ data, deleteFunction }) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   return (
     <tr>
       <td>{data.pizzaCheese}</td>
@@ -12,6 +14,7 @@ function TabelRowPizzaCheese({ data, deleteFunction }) {
           <i
             className="fas fa-thin fa-pen-to-square cursor-pointer"
             style={{ color: "#4046f2" }}
+            onClick={() => navigate(`/edit/pizzaCheese/${data.pizzaCheese}`)}
           ></i>
         </button>
       </td>
